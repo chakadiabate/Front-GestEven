@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/gestEvent/event/Reservation")
 @AllArgsConstructor
@@ -23,13 +23,15 @@ public class ReservationController {
         reservationService.Reserver(reservation);
         return "Reservation Effectué avec succès !!!";
     }
+
+    @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/ListReservation")
     public List<Reservation> getAllReservations() {
         return reservationService.getAllReservations();
     }
 
-    @GetMapping("/AnnulerReservation")
-    public String CancelReservation(Reservation reservation, String Statut) {
+    @PutMapping("/AnnulerReservation")
+    public String CancelReservation(@RequestBody Reservation reservation, @RequestBody String Statut) {
         reservationService.AnnulerReservation(reservation, Statut);
         return "Reservation annulée avec succès!!!";
     }

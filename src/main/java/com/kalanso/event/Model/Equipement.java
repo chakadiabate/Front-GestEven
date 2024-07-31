@@ -1,5 +1,6 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,10 +17,13 @@ public class Equipement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private String Name;
+    private String nom;
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "prestateur_id")
-    private Prestateur prestateur;
+    @JoinColumn(name = "presta_id")
+    @JsonIgnoreProperties("equipement")
+    private Presta presta;
+
+
 }

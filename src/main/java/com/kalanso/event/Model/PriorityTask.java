@@ -1,5 +1,6 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -17,10 +18,8 @@ public class PriorityTask {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long Id;
-
+    private  Long Id;
     private String priority;
-
     @OneToMany(mappedBy = "priority")
     private List<Taches> tache;
 

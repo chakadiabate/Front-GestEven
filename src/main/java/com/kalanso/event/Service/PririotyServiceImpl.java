@@ -30,7 +30,7 @@ public class PririotyServiceImpl implements PriorityService {
     public PriorityTask MAJ(Long id, PriorityTask priorityTask) {
         return priorityTaskRepo.findById(id)
                 .map(p->{
-                    p.setId(priorityTask.getId());
+                   // p.setId(priorityTask.getId());
                     p.setPriority(priorityTask.getPriority());
                     return priorityTaskRepo.save(p);
                 }).orElseThrow(()->new RuntimeException("Erreur lors de la mise à jour"));

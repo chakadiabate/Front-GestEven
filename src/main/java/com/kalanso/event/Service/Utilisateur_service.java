@@ -14,4 +14,7 @@ public interface Utilisateur_service {
     Utilisateur display(Integer id);
     Utilisateur update(Integer id,Utilisateur utilisateur);
     String delete(Integer id);
+    List<Utilisateur> listeParNom(String nom);
+
+    Utilisateur findByEmail(String username);
 }

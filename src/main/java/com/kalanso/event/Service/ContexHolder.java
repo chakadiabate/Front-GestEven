@@ -23,7 +23,6 @@ public class ContexHolder {
         }else{
             username = main.toString();
         }
-        Utilisateur user = utilisateur_repo.findByEmail(username).get();
-        return user;
+        return utilisateur_repo.findByEmail(username).get();
     }
 }

@@ -1,5 +1,8 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +11,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class Reservation {
@@ -20,23 +22,29 @@ public class Reservation {
     @JoinColumn(name = "statut_id")
     private StatutReservation statut;
 
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "evenement_id")
+    @JsonIgnoreProperties("reservation")
     private Evenement evenement;
 
     private Date date_res = new Date();
 
     @ManyToOne
     @JoinColumn(name = "methodePaiement_id")
+    @JsonIgnoreProperties("reservation")
     private MethodePaiement methodePaiement;
 
+   //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
+    @JsonIgnoreProperties("reservation")
     private Utilisateur utilisateur;
 
     @ManyToOne
     @JoinColumn(name = "categories")
-    private CategorieBillet category;
+    @JsonIgnoreProperties("reservation")
+     private CategorieBillet category;
 }
 
 

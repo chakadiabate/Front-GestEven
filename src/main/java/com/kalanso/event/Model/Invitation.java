@@ -17,7 +17,7 @@ public class Invitation {
 
     @ManyToOne
     @JoinColumn(name = "prestateur_id", nullable=false)
-    private Prestateur prestateur;
+    private Presta prestateur;
 
     @ManyToOne
     @JoinColumn(name = "id_event", nullable=false)

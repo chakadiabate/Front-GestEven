@@ -1,13 +1,13 @@
 package com.kalanso.event.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,33 +18,36 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
-    private java.sql.Date date;
-    private java.sql.Date datedebut ;
+    private Date date = new Date();
+    private Date datedebut ;
     private Date datefin ;
     private String description;
-    private String lieu;
-//    @JsonBackReference
+    private Integer nombrePlace;
 
     @ManyToOne
     @JoinColumn(name = "typeEvent_id")
+    @JsonIgnoreProperties("evenement")
     private TypeEvent typeevent;
 
-    //@ManyToOne
-    //@JoinColumn(name = "users_id")
-    //private Utilisateur utilisateur;
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    @JsonIgnoreProperties("evenement")
+    private Utilisateur utilisateur;
 
-//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "categories")
+    @JsonIgnoreProperties("evenement")
     private CategorieEvent category;
 
     @OneToMany(mappedBy = "evenement")
+    @JsonIgnoreProperties("evenement")
     private List<Notification> notification;
 
     @OneToMany(mappedBy = "evenement")
     private List<Derouler> derouler;
 
     @OneToMany(mappedBy = "evenement")
+    @JsonIgnoreProperties("evenement")
     private List<Reservation> reservation;
 
     // Getters, setters, constructeurs

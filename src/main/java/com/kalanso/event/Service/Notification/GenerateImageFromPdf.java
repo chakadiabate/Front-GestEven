@@ -20,7 +20,7 @@ public class GenerateImageFromPdf {
         ByteArrayInputStream inputStream = new ByteArrayInputStream(pdfBytes);
         PDDocument document = PDDocument.load(inputStream);
         PDFRenderer pdfRenderer = new PDFRenderer(document);
-        BufferedImage image = pdfRenderer.renderImageWithDPI(0, 300); // Render the first page with 300 DPI
+        BufferedImage image = pdfRenderer.renderImageWithDPI(0, 1000); // Render the first page with 4000 DPI
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ImageIO.write(image, "png", outputStream);

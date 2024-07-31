@@ -1,5 +1,8 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -17,10 +20,10 @@ public class StatutReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long Id;
+    private  Long Id;
     private String statut;
-
     @OneToMany(mappedBy = "statut")
+    @JsonIgnore
     private List<Reservation> reservation;
 
 }

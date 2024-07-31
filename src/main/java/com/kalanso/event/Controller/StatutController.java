@@ -7,20 +7,23 @@ import com.kalanso.event.Model.StatutReservation;
 import com.kalanso.event.Service.SatutReservationService;
 import com.kalanso.event.Service.StatutBilletService;
 import com.kalanso.event.Service.StatutEnvoiService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/GestEven/Statut")
 public class StatutController {
-
+    @Autowired
     StatutBilletService statutBilletService;
+    @Autowired
     StatutEnvoiService statutEnvoiService;
+    @Autowired
     SatutReservationService satutReservationService;
 
     @PostMapping("/AjouterStatutBillet")
-    public StatutBillet Ajout(StatutBillet statutBillet){
+    public StatutBillet Ajout(@RequestBody StatutBillet statutBillet){
         return statutBilletService.Ajout(statutBillet);
     }
 
@@ -29,19 +32,19 @@ public class StatutController {
         return statutBilletService.Afficher();
     }
 
-    @PutMapping("/ModidierStatutBillet")
-    public StatutBillet MAJ(Long Id, StatutBillet statutBillet){
-        return statutBilletService.MAJ(Id, statutBillet);
+    @PutMapping("/ModidierStatutBillet/{id}")
+    public StatutBillet MAJ(@PathVariable Long id, @RequestBody StatutBillet statutBillet){
+        return statutBilletService.MAJ(id, statutBillet);
     }
 
-    @DeleteMapping("/SupprimerStatutBillet")
-    public String Sup(Long Id){
-        return statutBilletService.Sup(Id);
+    @DeleteMapping("/SupprimerStatutBillet/{id}")
+    public String Sup(@PathVariable Long id){
+        return statutBilletService.Sup(id);
     }
 
 
     @PostMapping("/AjouterStatutEnvoi")
-    public StatutEnvoi Ajout(StatutEnvoi statutEnvoi){
+    public StatutEnvoi Ajout(@RequestBody StatutEnvoi statutEnvoi){
         return statutEnvoiService.Ajout(statutEnvoi);
     }
 
@@ -51,19 +54,19 @@ public class StatutController {
         return statutEnvoiService.Affiche();
     }
 
-    @PutMapping("/ModifierStatutEnvoi")
-    public StatutEnvoi MAJ(Long Id, StatutEnvoi statutEnvoi){
-        return statutEnvoiService.MAJ(Id, statutEnvoi);
+    @PutMapping("/ModifierStatutEnvoi/{id}")
+    public StatutEnvoi MAJ(@PathVariable Long id, @RequestBody StatutEnvoi statutEnvoi){
+        return statutEnvoiService.MAJ(id, statutEnvoi);
     }
 
 
-    @DeleteMapping("/SupprimerStatutEnvoi")
-    public String Supp(Long Id){
-        return statutEnvoiService.Supp(Id);
+    @DeleteMapping("/SupprimerStatutEnvoi/{id}")
+    public String Supp(@PathVariable Long id){
+        return statutEnvoiService.Supp(id);
     }
 
     @PostMapping("/AjouterStatutReservation")
-    public StatutReservation Ajout(StatutReservation statutReservation){
+    public StatutReservation Ajout(@RequestBody StatutReservation statutReservation){
         return satutReservationService.Ajout(statutReservation);
     }
 
@@ -73,13 +76,13 @@ public class StatutController {
         return satutReservationService.AfficherListeReservation();
     }
 
-    @PutMapping("/ModifierStatutReservation")
-    public StatutReservation MAJ(Long Id, StatutReservation statutReservation){
-        return satutReservationService.MAJ(Id, statutReservation);
+    @PutMapping("/ModifierStatutReservation/{id}")
+    public StatutReservation MAJ(@PathVariable Long id, @RequestBody StatutReservation statutReservation){
+        return satutReservationService.MAJ(id, statutReservation);
     }
 
-    @DeleteMapping("/SupprimerStatutReservation")
-    public String SupStatutreservation(Long Id){
-        return satutReservationService.SupStatutreservation(Id);
+    @DeleteMapping("/SupprimerStatutReservation/{id}")
+    public String SupStatutreservation(@PathVariable Long id){
+        return satutReservationService.SupStatutreservation(id);
     }
 }
