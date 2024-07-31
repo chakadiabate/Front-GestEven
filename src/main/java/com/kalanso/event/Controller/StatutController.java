@@ -17,9 +17,7 @@ import java.util.List;
 public class StatutController {
     @Autowired
     StatutBilletService statutBilletService;
-    @Autowired
     StatutEnvoiService statutEnvoiService;
-    @Autowired
     SatutReservationService satutReservationService;
 
     @PostMapping("/AjouterStatutBillet")
@@ -66,7 +64,7 @@ public class StatutController {
     }
 
     @PostMapping("/AjouterStatutReservation")
-    public StatutReservation Ajout(@RequestBody StatutReservation statutReservation){
+    public StatutReservation Ajout(StatutReservation statutReservation){
         return satutReservationService.Ajout(statutReservation);
     }
 

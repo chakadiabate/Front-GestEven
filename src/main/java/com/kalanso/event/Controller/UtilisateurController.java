@@ -4,6 +4,8 @@ import com.kalanso.event.Model.*;
 import com.kalanso.event.Service.Utilisateur_service;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,41 @@ import java.util.List;
 public class UtilisateurController {
    @Autowired
     private Utilisateur_service utilisateurService;
+
+
+    @GetMapping("/currentSession")
+    public Utilisateur getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof org.springframework.security.core.userdetails.User) {
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+            return utilisateurService.findByEmail(user.getUsername()); // Assurez-vous que cette méthode existe dans votre service
+        }
+        return null; // ou une réponse appropriée en cas d'absence d'utilisateur connecté
+    }
+
+
+    @PutMapping("/updateProfile")
+    public ResponseEntity<Utilisateur> updateProfile(@RequestBody Utilisateur updatedUser) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof org.springframework.security.core.userdetails.User) {
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+            Utilisateur currentUser = utilisateurService.findByEmail(user.getUsername());
+
+            if (currentUser != null) {
+                currentUser.setNom(updatedUser.getNom());
+                currentUser.setPrenom(updatedUser.getPrenom());
+                currentUser.setEmail(updatedUser.getEmail());
+                currentUser.setTelephone(updatedUser.getTelephone());
+                // Ajoutez d'autres champs à mettre à jour si nécessaire
+
+                Utilisateur savedUser = utilisateurService.updateUtilisateur(currentUser); // Assurez-vous que cette méthode existe
+                return ResponseEntity.ok(savedUser);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // ou une autre réponse appropriée
+    }
+
+
 
     @PostMapping("/CreerAdmin")
     public Admin CreerAdmin(@RequestBody Admin admin){
@@ -64,17 +101,4 @@ public class UtilisateurController {
     public  String supprimerAdmin( @PathVariable Integer id){
         return utilisateurService.delete(id);
     }
-
-    @GetMapping("/currentSession")
-    public Utilisateur getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && ((org.springframework.security.core.Authentication) authentication).getPrincipal() instanceof org.springframework.security.core.userdetails.User) {
-            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-            return utilisateurService.findByEmail(user.getPassword()); // Assurez-vous que cette méthode existe dans votre service
-        }
-        return null; // ou une réponse appropriée en cas d'absence d'utilisateur connecté
-    }
-
-
-
 }

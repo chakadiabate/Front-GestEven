@@ -12,7 +12,6 @@ import com.kalanso.event.Service.Notification.Notif_service_Reservation_impl;
 import com.lowagie.text.DocumentException;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xhtmlrenderer.css.style.derived.StringValue;
 
@@ -24,15 +23,11 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class Reservation_serviceImpl implements Reservation_service {
-    @Autowired
+
     private final Evenement_repo evenement_repo;
-    @Autowired
     private Reservation_repo reservationRepo;
-    @Autowired
     private Notif_service_Reservation_impl notifServiceReservationImpl;
-    @Autowired
     private StatutReservationRepo statutRepo;
-    @Autowired
     private ContexHolder contexHolder;
 
     @Override

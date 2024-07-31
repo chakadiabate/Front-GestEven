@@ -1,23 +1,15 @@
 package com.kalanso.event.Model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
-@Getter
-@Setter
+@JsonIgnoreProperties({"evenement", "reservation", "notification"}) // Ignore ces champs lors de la désérialisation
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +22,6 @@ public class Utilisateur {
     @Column(unique = true)
     private String telephone;
 
-    //@Column(unique = true)
     private String motDePasse;
 
     @ManyToOne
@@ -46,7 +37,10 @@ public class Utilisateur {
     private List<Reservation> reservation;
 
     @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnoreProperties("utilisateur")
     private List<Notification> notification;
 
-
+    // Constructor sans argument
+    public Utilisateur() {
+    }
 }

@@ -30,8 +30,8 @@ public class ReservationController {
         return reservationService.getAllReservations();
     }
 
-    @PutMapping("/AnnulerReservation")
-    public String CancelReservation(@RequestBody Reservation reservation, @RequestBody String Statut) {
+    @GetMapping("/AnnulerReservation")
+    public String CancelReservation(Reservation reservation, String Statut) {
         reservationService.AnnulerReservation(reservation, Statut);
         return "Reservation annulée avec succès!!!";
     }

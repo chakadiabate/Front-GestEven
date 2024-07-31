@@ -22,7 +22,7 @@ public class LieuController {
         return ResponseEntity.ok(nouveauLieu);
     }
 
-    @GetMapping("/ListeLieu")
+    @GetMapping
     public List<Lieu> getAllLieux() {
         return lieu_service.getAllLieu();
     }

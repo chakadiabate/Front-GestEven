@@ -16,7 +16,7 @@ public class PrestateurController {
    @Autowired
     private PrestateurService prestateurService;
 
-    @GetMapping("/ListePresta")
+    @GetMapping("/ListAllPresta")
     public List<Presta> getAllPrestateurs() {
         return prestateurService.ListPrestateurs();
     }
@@ -35,7 +35,7 @@ public class PrestateurController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deletePrestateur(@PathVariable Long id)
     {
         return prestateurService.SupPrestateur(id);

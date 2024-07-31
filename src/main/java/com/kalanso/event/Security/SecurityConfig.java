@@ -34,14 +34,14 @@ public class SecurityConfig {
                             .requestMatchers("/gestEvent/**").permitAll()
 
                             .requestMatchers("/gestEvent/role/**").permitAll()
-                            .anyRequest().permitAll();
+                            .anyRequest().authenticated();
 
                   
 
 
                     ;
                 })
-                .httpBasic(AbstractHttpConfigurer::disable)
+                .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractAuthenticationFilterConfigurer::disable)
                 .build();
     }

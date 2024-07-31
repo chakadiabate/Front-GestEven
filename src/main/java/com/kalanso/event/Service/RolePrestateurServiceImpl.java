@@ -3,7 +3,6 @@ package com.kalanso.event.Service;
 import com.kalanso.event.Model.RolePrestateur;
 import com.kalanso.event.Repository.RolePrestateurRepo;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class RolePrestateurServiceImpl implements RolePrestateurService{
-        @Autowired
+
         private RolePrestateurRepo rolePrestateurRepo;
 
     @Override

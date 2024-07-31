@@ -20,7 +20,7 @@ public class StatutReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long Id;
+    private  long Id;
     private String statut;
     @OneToMany(mappedBy = "statut")
     @JsonIgnore
