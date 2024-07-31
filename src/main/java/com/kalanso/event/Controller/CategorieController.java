@@ -3,25 +3,27 @@ package com.kalanso.event.Controller;
 import com.kalanso.event.Model.CategorieBillet;
 import com.kalanso.event.Model.CategorieEvent;
 import com.kalanso.event.Service.CategorieBilletService;
+import com.kalanso.event.Service.CategorieBilletServiceImpl;
 import com.kalanso.event.Service.CategorieEvent_service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins="*")
 @RestController
 @Controller
 @RequestMapping("/gestEvent/categories")
 public class CategorieController {
-
-
+    @Autowired
     CategorieEvent_service categorieEventService;
-    CategorieBilletService categorieBilletService;
+    @Autowired
+    CategorieBilletServiceImpl categorieBilletService;
 
 
 
     @PostMapping("/AjouterEventCats")
-    public CategorieEvent AjouterEventCat(CategorieEvent Cat){
+    public CategorieEvent AjouterEventCat(@RequestBody CategorieEvent Cat){
         return categorieEventService.AjouterCategorie(Cat);
     }
 
@@ -30,17 +32,17 @@ public class CategorieController {
         return categorieEventService.ListeCategorie();
     }
 
-    @DeleteMapping("/supEventCat")
-    public String SupEventCat(Long id){
+    @DeleteMapping("/supEventCat/{id}")
+    public String SupEventCat(@PathVariable Long id){
         return categorieEventService.supprimer(id);
     }
     @PutMapping("/modifEventCat")
-    public CategorieEvent modifierEventCat(Long id, CategorieEvent Cat){
+    public CategorieEvent modifierEventCat(@PathVariable Long id, @RequestBody CategorieEvent Cat){
         return categorieEventService.ModifierCategorie(id, Cat);
     }
 
     @PostMapping("/AjouterCATBillet")
-    public CategorieBillet Ajout(CategorieBillet categorieBillet){
+    public CategorieBillet Ajout(@RequestBody  CategorieBillet categorieBillet){
         return categorieBilletService.Ajout(categorieBillet);
     }
 
@@ -49,14 +51,14 @@ public class CategorieController {
         return categorieBilletService.Afficher();
     }
 
-    @PutMapping("/ModifierCategorieBillet")
-    public CategorieBillet MAJ(Long Id, CategorieBillet categorieBillet){
-        return categorieBilletService.MAJ(Id, categorieBillet);
+    @PutMapping("/ModifierCategorieBillet/{id}")
+    public CategorieBillet MAJ(@PathVariable Long id, @RequestBody CategorieBillet categorieBillet){
+        return categorieBilletService.MAJ(id, categorieBillet);
     }
 
-    @DeleteMapping("/SupprimerCtaegorieBillet")
-    public String Sup(Long Id){
-        return categorieBilletService.Sup(Id);
+    @DeleteMapping("/SupprimerCtaegorieBillet/{id}")
+    public String Sup(@PathVariable Long id){
+        return categorieBilletService.Sup(id);
     }
 
 }

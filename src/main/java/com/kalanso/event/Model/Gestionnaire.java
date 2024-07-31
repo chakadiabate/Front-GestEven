@@ -1,11 +1,12 @@
 package com.kalanso.event.Model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.management.relation.Role;
 import java.util.List;
 
 @Entity
@@ -14,8 +15,5 @@ import java.util.List;
 @Setter
 public class Gestionnaire extends Utilisateur{
 
-    @OneToMany(mappedBy = "gestionnaire")
-    private List<Prestateur> prestateur;
-    @OneToMany(mappedBy = "role")
-    private List<RoleUser> utilisateur;
+
 }

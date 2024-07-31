@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/gestEvent/paie")
 @AllArgsConstructor
@@ -15,7 +15,7 @@ public class MethodePaiementController {
     private MethoPaiService methoPaiService;
 
     @PostMapping("/AjouterMethodePaiement")
-    public MethodePaiement Ajouter(MethodePaiement methodePaiement){
+    public MethodePaiement Ajouter(@RequestBody MethodePaiement methodePaiement){
         return methoPaiService.Ajouter(methodePaiement);
     }
 
@@ -24,13 +24,13 @@ public class MethodePaiementController {
         return methoPaiService.AfficherMethode();
     }
 
-    @PutMapping("/ModifierMethodePaiement")
-    public MethodePaiement ModifierMethode(Long id, MethodePaiement methodePaiement){
+    @PutMapping("/ModifierMethodePaiement/{id}")
+    public MethodePaiement ModifierMethode(@PathVariable Long id,@RequestBody MethodePaiement methodePaiement){
         return methoPaiService.ModifierMethode(id, methodePaiement);
     }
 
-    @DeleteMapping("/SupprimerMethodePaiement")
-    public String SupMethodePaiement(Long id){
+    @DeleteMapping("/SupprimerMethodePaiement/{id}")
+    public String SupMethodePaiement(@PathVariable Long id){
         return methoPaiService.SupMethodePaiement(id);
     }
 

@@ -5,19 +5,18 @@ import com.kalanso.event.Model.Evenement;
 import com.kalanso.event.Service.Evenement_service;
 import com.kalanso.event.Service.Utilisateur_service;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
+@CrossOrigin(origins="*")
 @Controller
 @RestController
-@CrossOrigin(origins ="*")
 @RequestMapping("/gestEvent/event")
 @AllArgsConstructor
 public class EvenementController {
-
+    @Autowired
     private Evenement_service evenementService;
 
     @PostMapping("/addEvent")
@@ -26,25 +25,18 @@ public class EvenementController {
     }
 
 
-    @GetMapping("/{id}")
-    private Optional<Evenement> ajout (@PathVariable Integer id){
-        return evenementService.Event(id);
-    }
-
-
-//    @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/afficher")
-    private List<Evenement> Afficher(Evenement evenement) {
-        return evenementService.Afficher(evenement);
+    private List<Evenement> Afficher() {
+        return evenementService.Afficher();
     }
 
-    @DeleteMapping("/delete")
-    public String Delete(Evenement evenement) {
-        return evenementService.Delete(evenement);
+    @DeleteMapping("/delete/{id}")
+    public String Delete(@PathVariable Integer id) {
+        return evenementService.Delete(id);
     }
 
-    @PutMapping("/update")
-    public Evenement update(Evenement evenement) {
-        return evenementService.update(evenement);
-    }
+  //  @PutMapping("/update/{id}")
+  //  public Evenement update(@PathVariable Evenement evenement) {
+    //    return evenementService.update(evenement);
+    //}
 }

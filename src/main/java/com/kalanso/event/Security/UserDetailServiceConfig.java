@@ -16,16 +16,19 @@ import java.util.Optional;
 public class UserDetailServiceConfig implements UserDetailsService {
 
     private Utilisateur_repo utilisateur_repo;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         System.out.println("hello");
         Optional<Utilisateur> utilisateur = utilisateur_repo.findByEmail(email);
+        System.out.println("helloAlpha");
         if (utilisateur.isPresent()) {
-            System.out.println(utilisateur.get().getRole());
+            System.out.println("helloAlpha2");
+            System.out.println(utilisateur.get().getRole().getRole());
             System.out.println(utilisateur.get().getEmail());
             System.out.println(utilisateur.get().getMotDePasse());
         }
-
+        System.out.println("helloAlpha1");
         return User
                 .withUsername(utilisateur.get().getEmail())
                 .password(utilisateur.get().getMotDePasse())

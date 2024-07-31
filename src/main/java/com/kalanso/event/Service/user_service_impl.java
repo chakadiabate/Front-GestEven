@@ -4,6 +4,7 @@ package com.kalanso.event.Service;
 import com.kalanso.event.Model.*;
 import com.kalanso.event.Repository.Utilisateur_repo;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +13,9 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class user_service_impl implements Utilisateur_service {
-
+    @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     private Utilisateur_repo utilisateurRepo;
 
     @Override
@@ -68,5 +70,15 @@ public class user_service_impl implements Utilisateur_service {
     public String delete(Integer id) {
         utilisateurRepo.deleteById(id);
         return "Utilisateur éffacé avec succès";
+    }
+
+    @Override
+    public List<Utilisateur> listeParNom(String nom) {
+        return utilisateurRepo.findByNom(nom);
+    }
+
+    @Override
+    public Utilisateur findByEmail(String password) {
+        return utilisateurRepo.findByEmail(password).orElse(null);
     }
 }

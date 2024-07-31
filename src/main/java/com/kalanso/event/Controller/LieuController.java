@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/gestEvent/lieu")
 @AllArgsConstructor
@@ -16,18 +16,18 @@ public class LieuController {
 
     private Lieu_service lieu_service;
 
-    @PostMapping
+    @PostMapping("/Ajouter")
     public ResponseEntity<Lieu> ajouterLieu(@RequestBody Lieu lieu) {
         Lieu nouveauLieu = lieu_service.ajouterLieu(lieu);
         return ResponseEntity.ok(nouveauLieu);
     }
 
-    @GetMapping
+    @GetMapping("/ListeLieu")
     public List<Lieu> getAllLieux() {
         return lieu_service.getAllLieu();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/Afficher/{id}")
     public ResponseEntity<Lieu> getLieuById(@PathVariable Long id) {
         Lieu lieu = lieu_service.getLieuById(id);
         if (lieu != null) {
@@ -37,13 +37,13 @@ public class LieuController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteLieu(@PathVariable Long id) {
         lieu_service.deleteLieu(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Lieu> updateLieu(@PathVariable Integer id, @RequestBody Lieu lieuDetails) {
         Lieu updatedLieu = lieu_service.updateLieu(id, lieuDetails);
         return ResponseEntity.ok(updatedLieu);

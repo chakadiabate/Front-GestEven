@@ -25,7 +25,7 @@ public class Notif_service_Evenement_impl {
 
     private Notification_repo notificationRepo;
     private JavaMailSender javaMailSender;
-    //private ContexHolder contexHolder;
+    private ContexHolder contexHolder;
 
     public void SendMail(Notification notification) throws MessagingException, IOException, DocumentException, WriterException{
         String content ="<!DOCTYPE html>" +
@@ -46,14 +46,14 @@ public class Notif_service_Evenement_impl {
             "<div class='container'>" +
                 "<div class='header'>" +
                     "<h1>Bonjour, " + notification.getUtilisateur() + "!</h1>" +
-                //"</div>" +
-                //"<div class='content'>" +
-                //"<p>Monsieur, " + contexHolder.utilisateur().getNom() + " vient d'ajouter un evenemnt.</p>" +
+                "</div>" +
+                "<div class='content'>" +
+                    "<p>Monsieur, " + contexHolder.utilisateur().getNom() + " vient d'ajouter un evenemnt.</p>" +
                     "<p>Titre de l'evenement : " + notification.getEvenement().getNom() + " </p>" +
-                // "</div>" +
-                // "<div class='footer'>" +
-                // "<p>&copy; 2024 ODK_P4_GP2. Tous droits réservés.</p>"+
-                //"</div>" +
+                "</div>" +
+                "<div class='footer'>" +
+                    "<p>&copy; 2024 ODK_P4_GP2. Tous droits réservés.</p>"+
+                "</div>" +
             "</div>" +
         "</body>" +
         "</html>";

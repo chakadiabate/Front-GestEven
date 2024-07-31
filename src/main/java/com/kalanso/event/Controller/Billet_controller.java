@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/gestEvent/billets")
 @AllArgsConstructor
@@ -30,7 +30,7 @@ public class Billet_controller {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("AjoutBillet")
     public ResponseEntity<Billet> createBillet(@RequestBody Billet billet) {
         Billet createdBillet = billetService.createBillet(billet);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBillet);

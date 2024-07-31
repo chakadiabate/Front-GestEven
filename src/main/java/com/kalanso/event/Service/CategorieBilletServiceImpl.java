@@ -3,6 +3,7 @@ package com.kalanso.event.Service;
 import com.kalanso.event.Model.CategorieBillet;
 import com.kalanso.event.Repository.CategorieBilletRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class CategorieBilletServiceImpl implements CategorieBilletService{
-
+  @Autowired
     private CategorieBilletRepo categorieBilletRepo;
 
     @Override

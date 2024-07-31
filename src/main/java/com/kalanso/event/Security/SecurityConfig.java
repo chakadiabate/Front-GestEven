@@ -32,11 +32,17 @@ public class SecurityConfig {
                 .authorizeHttpRequests((registry)->{
                     registry
                             .requestMatchers("/gestEvent/**").permitAll()
-                            //.requestMatchers("/gestEvent/categories/**").permitAll();
+
+                            .requestMatchers("/gestEvent/role/**").permitAll()
                             .anyRequest().permitAll();
+
+                  
+
+
+                    ;
                 })
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractAuthenticationFilterConfigurer::disable)
                 .build();
     }
 

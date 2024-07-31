@@ -3,6 +3,7 @@ package com.kalanso.event.Service;
 import com.kalanso.event.Model.CategorieEvent;
 import com.kalanso.event.Repository.CategorieEventRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class CategorieEvent_service {
-
+     @Autowired
     private CategorieEventRepo categorieEventRepo;
 
     public CategorieEvent AjouterCategorie(CategorieEvent Ca){
@@ -21,12 +22,12 @@ public class CategorieEvent_service {
         return categorieEventRepo.findAll();
     }
 
-    public String supprimer(long id){
+    public String supprimer(Long id){
         categorieEventRepo.deleteById(id);
         return "Categorie supprimer avec succès";
     }
 
-    public CategorieEvent ModifierCategorie(long id, CategorieEvent Categorie){
+    public CategorieEvent ModifierCategorie(Long id, CategorieEvent Categorie){
         return categorieEventRepo.findById(id)
                 .map(Cat->{
                     Cat.setCategory(Categorie.getCategory());
