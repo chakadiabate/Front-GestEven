@@ -11,14 +11,14 @@ import java.util.List;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/gestEvent/event/Reservation")
+@RequestMapping("/gestEvent/reservation")
 @AllArgsConstructor
 public class ReservationController {
 
 
     private Reservation_service reservationService;
 
-    @PostMapping("/Reserver")
+    @PostMapping("/reserver")
     public String Reserver(@RequestBody Reservation reservation) {
         reservationService.Reserver(reservation);
         return "Reservation Effectué avec succès !!!";
@@ -30,9 +30,8 @@ public class ReservationController {
         return reservationService.getAllReservations();
     }
 
-    @PutMapping("/AnnulerReservation")
-    public String CancelReservation(@RequestBody Reservation reservation, @RequestBody String Statut) {
-        reservationService.AnnulerReservation(reservation, Statut);
-        return "Reservation annulée avec succès!!!";
+    @PatchMapping("/AnnulerReservation")
+    public Reservation CancelReservation(@RequestParam Long id) {
+        return reservationService.AnnulerReservation(id);
     }
 }

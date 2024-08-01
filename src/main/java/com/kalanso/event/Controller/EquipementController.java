@@ -10,29 +10,29 @@ import java.util.List;
 import java.util.Optional;
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/equipements")
+@RequestMapping("/gestEvent/equipements")
 public class EquipementController {
 
     @Autowired
     private EquipementService equipementService;
 
-    @GetMapping("/ListEquipements")
+    @GetMapping("/listEquipements")
     public List<Equipement> getAllEquipements() {
         return equipementService.findAll();
     }
 
-    @GetMapping("UnEquipement/{id}")
+    @GetMapping("unEquipement/{id}")
     public ResponseEntity<Equipement> getEquipementById(@PathVariable Long id) {
         Optional<Equipement> equipement = equipementService.findById(id);
         return equipement.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/AjoutEquipement")
+    @PostMapping("/ajoutEquipement")
     public Equipement createEquipement(@RequestBody Equipement equipement) {
         return equipementService.save(equipement);
     }
 
-    @PutMapping("/ModifEquipement/{id}")
+    @PutMapping("/modifEquipement/{id}")
     public ResponseEntity<Equipement> updateEquipement(@PathVariable Long id, @RequestBody Equipement equipementDetails) {
         Optional<Equipement> equipement = equipementService.findById(id);
 
@@ -46,7 +46,7 @@ public class EquipementController {
         }
     }
 
-    @DeleteMapping("/SupEquipement/{id}")
+    @DeleteMapping("/supEquipement/{id}")
     public ResponseEntity<Void> deleteEquipement(@PathVariable Long id) {
         Optional<Equipement> equipement = equipementService.findById(id);
 

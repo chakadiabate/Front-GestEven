@@ -1,9 +1,6 @@
 package com.kalanso.event.Model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -46,7 +43,10 @@ public class Utilisateur {
     private List<Reservation> reservation;
 
     @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnoreProperties("utilisateur")
     private List<Notification> notification;
 
-
+    @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnoreProperties("utilisateur")
+    private List<Presta> presta;
 }

@@ -10,14 +10,16 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "derouler")
 public class Derouler {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "lieu_id")
     private Lieu lieu;

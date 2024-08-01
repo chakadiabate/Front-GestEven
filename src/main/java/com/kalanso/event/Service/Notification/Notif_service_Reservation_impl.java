@@ -60,7 +60,7 @@ public class Notif_service_Reservation_impl {
                 "<body>\n" +
                 "    <div class=\"container\">\n" +
                 "        <div class=\"header\">\n" +
-                "            <h1>Bienvenue à Notre Événement," + contexHolder.utilisateur().getNom() + "!</h1>\n" +
+                "            <h1>Bienvenue à Notre Événement, " + contexHolder.utilisateur().getNom() + "!</h1>\n" +
                 "        </div>\n" +
                 "        <div class=\"content\">\n" +
                 "            <p>Nous sommes ravis de vous inviter à notre événement spécial. Préparez-vous pour une expérience inoubliable avec des sessions interactives, des conférenciers de renommée mondiale, et bien plus encore.</p>\n" +
@@ -71,6 +71,49 @@ public class Notif_service_Reservation_impl {
                 "                <li>Heure : "+ heureFormatee + "</li>\n" +
                 "            </ul>\n" +
                 "            <p>Assurez-vous de confirmer votre présence en répondant à cet e-mail. Nous avons hâte de vous voir!</p>\n" +
+                "        </div>\n" +
+                "        <div class=\"footer\">\n" +
+                "            <p>&copy; 2024 ODK_P4_GP2. Tous droits réservés.</p>\n" +
+                "        </div>\n" +
+                "    </div>\n" +
+                "</body>\n" +
+                "</html>";
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true) ;
+        helper.setTo(notification.getDest_email());
+        helper.setSubject(notification.getSujet());
+        helper.setSentDate(notification.getDateEnvoi());
+        helper.setText(content, true);
+        System.out.println("hello");
+
+        javaMailSender.send(message);
+        notificationRepo.save(notification);
+    }
+
+    public void sendMailCancel(Notification notification) throws MessagingException{
+
+        String content ="<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <style>\n" +
+                "        body { font-family: 'Roboto', sans-serif; background-color: #ffffff; color: white; margin: 0; padding: 0; }\n" +
+                "        .container { max-width: 600px; margin: auto; padding: 20px; background-color: #1f1f1f; color: white;border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }\n" +
+                "        .header { background-color: #ff7000; padding: 20px; border-radius: 10px 10px 0 0; text-align: center; }\n" +
+                "        .header h1 { margin: 0; font-size: 24px; }\n" +
+                "        .content { padding: 20px; }\n" +
+                "        @page { width : 300px; height: 100px; }" +
+                "        .content p { line-height: 1.6; }\n" +
+                "        .footer { text-align: center; color: #888; font-size: 12px; padding: 10px; border-radius: 0 0 10px 10px; background-color: #2c2c2c; }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "    <div class=\"container\">\n" +
+                "        <div class=\"header\">\n" +
+                "            <h1>Annulation d'évènement !</h1>\n" +
+                "        </div>\n" +
+                "        <div class=\"content\">\n" +
+                "            <p> Votre reservation a été annulé avec succès.</p>\n" +
                 "        </div>\n" +
                 "        <div class=\"footer\">\n" +
                 "            <p>&copy; 2024 ODK_P4_GP2. Tous droits réservés.</p>\n" +

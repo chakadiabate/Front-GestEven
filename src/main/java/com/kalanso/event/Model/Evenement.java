@@ -31,7 +31,7 @@ public class Evenement {
 
     @ManyToOne
     @JoinColumn(name = "users_id")
-    @JsonIgnoreProperties("evenement")
+    @JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
     private Utilisateur utilisateur;
 
     @ManyToOne
@@ -40,14 +40,14 @@ public class Evenement {
     private CategorieEvent category;
 
     @OneToMany(mappedBy = "evenement")
-    @JsonIgnoreProperties("evenement")
+    @JsonIgnoreProperties({"utilisateur", "evenement"})
     private List<Notification> notification;
 
     @OneToMany(mappedBy = "evenement")
     private List<Derouler> derouler;
 
     @OneToMany(mappedBy = "evenement")
-    @JsonIgnoreProperties("evenement")
+    @JsonIgnoreProperties({"utilisateur", "evenement"})
     private List<Reservation> reservation;
 
     // Getters, setters, constructeurs

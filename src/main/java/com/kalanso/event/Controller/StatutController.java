@@ -7,6 +7,7 @@ import com.kalanso.event.Model.StatutReservation;
 import com.kalanso.event.Service.SatutReservationService;
 import com.kalanso.event.Service.StatutBilletService;
 import com.kalanso.event.Service.StatutEnvoiService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +15,11 @@ import java.util.List;
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/GestEven/Statut")
+@AllArgsConstructor
 public class StatutController {
-    @Autowired
+
     StatutBilletService statutBilletService;
-    @Autowired
     StatutEnvoiService statutEnvoiService;
-    @Autowired
     SatutReservationService satutReservationService;
 
     @PostMapping("/AjouterStatutBillet")

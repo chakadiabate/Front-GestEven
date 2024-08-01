@@ -28,7 +28,7 @@ public class LieuController {
     }
 
     @GetMapping("/Afficher/{id}")
-    public ResponseEntity<Lieu> getLieuById(@PathVariable Long id) {
+    public ResponseEntity<Lieu> getLieuById(@PathVariable Integer id) {
         Lieu lieu = lieu_service.getLieuById(id);
         if (lieu != null) {
             return ResponseEntity.ok(lieu);
@@ -38,7 +38,7 @@ public class LieuController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteLieu(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLieu(@PathVariable Integer id) {
         lieu_service.deleteLieu(id);
         return ResponseEntity.noContent().build();
     }

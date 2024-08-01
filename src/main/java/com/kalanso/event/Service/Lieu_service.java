@@ -26,17 +26,17 @@ public class Lieu_service {
         return lieu_repo.findAll();
     }
 
-    public Lieu getLieuById(Long id) {
+    public Lieu getLieuById(Integer id) {
         return lieu_repo.findById(id).orElse(null);
     }
 
-    public void deleteLieu(Long id) {
+    public void deleteLieu(Integer id) {
         lieu_repo.deleteById(id);
     }
 
     @Transactional
     public Lieu updateLieu(Integer id, Lieu lieuDetails) {
-        Lieu lieu = lieu_repo.findById(Long.valueOf(id))
+        Lieu lieu = lieu_repo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Lieu not found with id " + id));
 
         lieu.setNom(lieuDetails.getNom());

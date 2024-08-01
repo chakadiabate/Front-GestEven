@@ -14,7 +14,4 @@ import java.util.List;
 @Setter
 @Entity
 public class Organisateur extends Utilisateur{
-    @OneToMany(mappedBy = "organisateur")
-    @JsonIgnoreProperties("organisateur")
-    private List<Presta> presta;
 }

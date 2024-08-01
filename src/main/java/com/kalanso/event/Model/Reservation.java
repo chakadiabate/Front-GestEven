@@ -1,10 +1,7 @@
 package com.kalanso.event.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,10 +19,10 @@ public class Reservation {
     @JoinColumn(name = "statut_id")
     private StatutReservation statut;
 
-//    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "evenement_id")
-    @JsonIgnoreProperties("reservation")
+    @JsonIgnoreProperties("reservation, utilisateur")
     private Evenement evenement;
 
     private Date date_res = new Date();

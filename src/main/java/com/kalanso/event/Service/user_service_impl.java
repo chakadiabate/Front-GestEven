@@ -2,6 +2,7 @@ package com.kalanso.event.Service;
 
 
 import com.kalanso.event.Model.*;
+import com.kalanso.event.Repository.RoleUserRepo;
 import com.kalanso.event.Repository.Utilisateur_repo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,10 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class user_service_impl implements Utilisateur_service {
-    @Autowired
-    private final PasswordEncoder passwordEncoder;
-    @Autowired
+
+    private PasswordEncoder passwordEncoder;
     private Utilisateur_repo utilisateurRepo;
+    private RoleUserRepo roleUserRepo;
 
     @Override
     public Client creerClient(Client client) {
@@ -26,18 +27,24 @@ public class user_service_impl implements Utilisateur_service {
 
     @Override
     public Gestionnaire CreerGestionnaire(Gestionnaire gestionnaire) {
+        RoleUser roleUser = roleUserRepo.findByRole("GESTIONNAIRE");
+        gestionnaire.setRole(roleUser);
         gestionnaire.setMotDePasse(passwordEncoder.encode(gestionnaire.getMotDePasse()));
         return utilisateurRepo.save(gestionnaire);
     }
 
     @Override
     public Admin createAdmin(Admin admin) {
+        RoleUser roleUser = roleUserRepo.findByRole("ADMIN");
+        admin.setRole(roleUser);
         admin.setMotDePasse(passwordEncoder.encode(admin.getMotDePasse()));
         return utilisateurRepo.save(admin);
     }
 
     @Override
     public Organisateur creerOrganisateur(Organisateur organisateur) {
+        RoleUser roleUser = roleUserRepo.findByRole("ORGANISATEUR");
+        organisateur.setRole(roleUser);
         organisateur.setMotDePasse(passwordEncoder.encode(organisateur.getMotDePasse()));
         return utilisateurRepo.save(organisateur);
     }

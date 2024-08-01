@@ -31,17 +31,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((registry)->{
                     registry
-                            .requestMatchers("/gestEvent/**").permitAll()
-
-                            .requestMatchers("/gestEvent/role/**").permitAll()
-                            .anyRequest().permitAll();
-
-                  
-
-
-                    ;
+                            .requestMatchers("/gestEvent/user/CreerOrga").hasRole("GESTIONNAIRE")
+                            .requestMatchers("/gestEvent/event/addEvent/**", "/gestEvent/categories/**", "/gestEvent/lieu/**", "/gestEvent/prestateurs/**", "/gestEvent/reservation/**").hasAnyRole("ORGANISATEUR", "ADMIN", "GESTIONNAIRE")
+                            .requestMatchers("/gestEvent/**").hasRole("ADMIN")
+                            .anyRequest().authenticated();
                 })
-                .httpBasic(AbstractHttpConfigurer::disable)
+                .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractAuthenticationFilterConfigurer::disable)
                 .build();
     }

@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface Reservation_service {
     Reservation Reserver(Reservation reservation);
-    Reservation AnnulerReservation(Reservation reservation, String Statut);
+    Reservation AnnulerReservation(Long id);
     List<Reservation> getAllReservations();
 }

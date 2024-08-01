@@ -2,10 +2,9 @@ package com.kalanso.event.Controller;
 
 import com.kalanso.event.Model.CategorieBillet;
 import com.kalanso.event.Model.CategorieEvent;
-import com.kalanso.event.Service.CategorieBilletService;
 import com.kalanso.event.Service.CategorieBilletServiceImpl;
 import com.kalanso.event.Service.CategorieEvent_service;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +13,11 @@ import java.util.List;
 @RestController
 @Controller
 @RequestMapping("/gestEvent/categories")
+@AllArgsConstructor
 public class CategorieController {
-    @Autowired
+
     CategorieEvent_service categorieEventService;
-    @Autowired
     CategorieBilletServiceImpl categorieBilletService;
-
-
 
     @PostMapping("/AjouterEventCats")
     public CategorieEvent AjouterEventCat(@RequestBody CategorieEvent Cat){
@@ -36,7 +33,8 @@ public class CategorieController {
     public String SupEventCat(@PathVariable Long id){
         return categorieEventService.supprimer(id);
     }
-    @PutMapping("/modifEventCat")
+
+    @PutMapping("/modifEventCat/{id}")
     public CategorieEvent modifierEventCat(@PathVariable Long id, @RequestBody CategorieEvent Cat){
         return categorieEventService.ModifierCategorie(id, Cat);
     }

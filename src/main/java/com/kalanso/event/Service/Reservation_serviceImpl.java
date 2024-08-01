@@ -12,40 +12,33 @@ import com.kalanso.event.Service.Notification.Notif_service_Reservation_impl;
 import com.lowagie.text.DocumentException;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xhtmlrenderer.css.style.derived.StringValue;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class Reservation_serviceImpl implements Reservation_service {
-    @Autowired
+
     private final Evenement_repo evenement_repo;
-    @Autowired
     private Reservation_repo reservationRepo;
-    @Autowired
     private Notif_service_Reservation_impl notifServiceReservationImpl;
-    @Autowired
     private StatutReservationRepo statutRepo;
-    @Autowired
     private ContexHolder contexHolder;
 
     @Override
     public Reservation Reserver(Reservation reservation) {
         StatutReservation statutReservation = statutRepo.findByStatut("ACTIVE");
-        //reservation.setUtilisateur(contexHolder.utilisateur());
+        reservation.setUtilisateur(contexHolder.utilisateur());
         reservation.setDate_res(new Date());
         reservation.setStatut(statutReservation);
         //Integer evenement_id = reservation.getEvenement().getId();
 
         reservationRepo.save(reservation);
 
-       /* System.out.println(reservation.getEvenement());
+        System.out.println(reservation.getEvenement());
         evenement_repo.findById(reservation.getEvenement().getId()).map(ev->{
             Integer typeevent_id = ev.getTypeevent().getId();
             System.out.println(typeevent_id);
@@ -80,17 +73,18 @@ public class Reservation_serviceImpl implements Reservation_service {
                 }
             }
             return ev;
-        });*/
+        });
 
         return reservation;
     }
 
     @Override
-    public Reservation AnnulerReservation(Reservation reservation, String Statut) {
-        StatutReservation statutReservation = statutRepo.findByStatut(Statut);
-        reservation.setStatut(statutReservation);
-        return reservationRepo.save(reservation);
-    }
+    public Reservation AnnulerReservation(Long id) {
+        return reservationRepo.findById(id).map(p->{
+            p.setStatut(statutRepo.findByStatut("INACTIVE"));
+            return reservationRepo.save(p);
+        }).orElseThrow(()->new RuntimeException("Erreur lors de l'annulation de votre reservation"));
+    };
 
     @Override
     public List<Reservation> getAllReservations() {

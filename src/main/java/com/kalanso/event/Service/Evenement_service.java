@@ -7,7 +7,7 @@ import java.util.List;
 public interface Evenement_service{
 
     //Methode pour ajouter un evenement
-    String Ajout(Evenement evenement);
+    String Ajout(Evenement evenement, Integer id);
 
     //Methode pour afficher un evenement
     List<Evenement> Afficher();
@@ -16,5 +16,6 @@ public interface Evenement_service{
     String Delete(Integer id);
 
     //Methode pour mettre à jour un evenement
-    Evenement update(Integer id,Evenement evenement);
+    Evenement update(Integer id, Evenement evenement);
+
 }

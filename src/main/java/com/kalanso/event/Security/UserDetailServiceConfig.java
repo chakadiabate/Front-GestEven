@@ -3,6 +3,7 @@ package com.kalanso.event.Security;
 import com.kalanso.event.Model.Utilisateur;
 import com.kalanso.event.Repository.Utilisateur_repo;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

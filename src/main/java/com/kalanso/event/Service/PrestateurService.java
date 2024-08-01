@@ -1,7 +1,9 @@
 package com.kalanso.event.Service;
 
 import com.kalanso.event.Model.Presta;
+import com.kalanso.event.Model.Utilisateur;
 import com.kalanso.event.Repository.PrestateurRepository;
+import jdk.jshell.execution.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,13 @@ import java.util.List;
 public class PrestateurService implements PrestaService{
    @Autowired
    private PrestateurRepository prestateurRepository;
+    @Autowired
+    private ContexHolder contexHolder;
 
     @Override
     public Presta AjouterPresta(Presta presta) {
+        Utilisateur utilisateur = contexHolder.utilisateur();
+        presta.setUtilisateur(utilisateur);
         return prestateurRepository.save(presta) ;
     }
 

@@ -30,11 +30,15 @@ public class EventApplication {
 				rolePrestateurRepo.save(rolePrestateur);
 			}
 
-			StatutReservation statutReservations = statutReservationRepo.findByStatut("ACTIVE");
-			if (statutReservations == null) {
-				StatutReservation statutReservation = new StatutReservation();
-				statutReservation.setStatut("ACTIVE");
-				statutReservationRepo.save(statutReservation);
+			StatutReservation statutReservations1 = statutReservationRepo.findByStatut("ACTIVE");
+			StatutReservation statutReservations2 = statutReservationRepo.findByStatut("INACTIVE");
+			if (statutReservations1 == null || statutReservations2 == null) {
+				StatutReservation statutReservation1 = new StatutReservation();
+				statutReservation1.setStatut("ACTIVE");
+				statutReservationRepo.save(statutReservation1);
+				StatutReservation statutReservation2 = new StatutReservation();
+				statutReservation2.setStatut("INACTIVE");
+				statutReservationRepo.save(statutReservation2);
 			}
 
 			StatutEnvoi statutEnvois = statutEnvoiRepo.findByStatut("SUCCES");//Or ECHEC
@@ -55,7 +59,7 @@ public class EventApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner2(MethoPaieRepo methoPaieRepo,TypeEventRepo typeEventRepo, PriorityTaskRepo priorityTaskRepo, CategorieBilletRepo categorieBilletRepo, CategorieEventRepo categorieEventRepo) {
+	public CommandLineRunner commandLineRunner2(RoleUserRepo roleuserRepo,MethoPaieRepo methoPaieRepo,TypeEventRepo typeEventRepo, PriorityTaskRepo priorityTaskRepo, CategorieBilletRepo categorieBilletRepo, CategorieEventRepo categorieEventRepo) {
 		return args -> {
 			PriorityTask priorityTask1 = priorityTaskRepo.findByPriority("ELEVEE");
 			PriorityTask priorityTask2 = priorityTaskRepo.findByPriority("MOYENNE");
@@ -119,6 +123,18 @@ public class EventApplication {
 				methodepaieB.setMethodepaie("Moov_money");
 				methoPaieRepo.save(methodepaieB);
 			}
+
+            RoleUser roleUsers1 = roleuserRepo.findByRole("GESTIONNAIRE");
+            RoleUser roleUsers2 = roleuserRepo.findByRole("ORGANISATEUR");
+            if (roleUsers1 == null || roleUsers2 == null) {
+                RoleUser roleUser1 = new RoleUser();
+                roleUser1.setRole("GESTIONNAIRE");
+                System.out.println("hello3");
+                RoleUser roleUser2 = new RoleUser();
+                roleUser2.setRole("ORGANISATEUR");
+                roleuserRepo.save(roleUser1);
+                roleuserRepo.save(roleUser2);
+            }
 
 		};
 	}
