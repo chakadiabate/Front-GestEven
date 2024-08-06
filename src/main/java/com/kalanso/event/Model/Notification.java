@@ -16,9 +16,9 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Utilisateur utilisateur;
+    //@ManyToOne
+    //@JoinColumn(name = "user_id")
+    //private Utilisateur utilisateur;
 
     @ManyToOne
     @JoinColumn(name = "evenement_id")

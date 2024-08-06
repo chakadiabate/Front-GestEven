@@ -45,7 +45,7 @@ public class Notif_service_Evenement_impl {
         "<body>" +
             "<div class='container'>" +
                 "<div class='header'>" +
-                    "<h1>Bonjour, " + notification.getUtilisateur().getNom() + "!</h1>" +
+                    //"<h1>Bonjour, " + notification.getUtilisateur().getNom() + "!</h1>" +
                 "</div>" +
                 "<div class='content'>" +
                     "<p>Monsieur, " + contexHolder.utilisateur().getNom() + " vient d'ajouter un evenemnt.</p>" +

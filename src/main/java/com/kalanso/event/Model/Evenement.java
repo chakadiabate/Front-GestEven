@@ -7,8 +7,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.TimeZone;
 
 @Entity
 @Data
@@ -18,21 +22,24 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
-    private Date date = new Date();
-    private Date datedebut ;
+    private java.sql.Date date;
+    private java.sql.Date datedebut ;
     private Date datefin ;
+    private LocalTime heure ;
     private String description;
-    private Integer nombrePlace;
+    //private Integer nombrePlace;
+
+    private String lieu;
 
     @ManyToOne
     @JoinColumn(name = "typeEvent_id")
     @JsonIgnoreProperties("evenement")
     private TypeEvent typeevent;
 
-    @ManyToOne
-    @JoinColumn(name = "users_id")
-    @JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
-    private Utilisateur utilisateur;
+    //@ManyToOne
+    //@JoinColumn(name = "users_id")
+    //@JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
+    //private Utilisateur utilisateur;
 
     @ManyToOne
     @JoinColumn(name = "categories")
@@ -43,6 +50,7 @@ public class Evenement {
     @JsonIgnoreProperties({"utilisateur", "evenement"})
     private List<Notification> notification;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "evenement")
     private List<Derouler> derouler;
 
