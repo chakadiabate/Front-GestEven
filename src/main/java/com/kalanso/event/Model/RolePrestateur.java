@@ -18,8 +18,9 @@ public class RolePrestateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String role;
-    @JsonIgnoreProperties("rolePrestateur")
+
     @JsonBackReference(value = "prestateurs")
+    @JsonIgnoreProperties("rolePrestateur")
     @OneToMany(mappedBy = "rolePrestateur")
     private List<Presta> presta;
 }

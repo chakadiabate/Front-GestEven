@@ -88,4 +88,11 @@ public class user_service_impl implements Utilisateur_service {
     public Utilisateur findByEmail(String password) {
         return utilisateurRepo.findByEmail(password).orElse(null);
     }
+
+    //modifier profil
+    @Override
+    public Utilisateur updateUtilisateur(Utilisateur utilisateur) {
+        return utilisateurRepo.save(utilisateur); // Assurez-vous que votre repository étend JpaRepository
+    }
+
 }

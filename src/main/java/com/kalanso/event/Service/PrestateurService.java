@@ -18,8 +18,9 @@ public class PrestateurService implements PrestaService{
 
     @Override
     public Presta AjouterPresta(Presta presta) {
-        Utilisateur utilisateur = contexHolder.utilisateur();
-        presta.setUtilisateur(utilisateur);
+       // Utilisateur utilisateur = contexHolder.utilisateur();
+     //  System.out.println(utilisateur);
+      //  presta.setUtilisateur(utilisateur);
         return prestateurRepository.save(presta) ;
     }
 

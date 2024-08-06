@@ -12,7 +12,6 @@ import java.util.List;
 
 
 @CrossOrigin(origins="*")
-@Controller
 @RestController
 @RequestMapping("gestEvent/role")
 @AllArgsConstructor
