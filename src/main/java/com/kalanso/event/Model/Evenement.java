@@ -18,9 +18,9 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
-    private Date date = new Date();
-    private Date datedebut ;
-    private Date datefin ;
+    private java.sql.Date date ;
+    private java.sql.Date datedebut ;
+    private java.sql.Date datefin ;
     private String description;
     private Integer nombrePlace;
 
@@ -44,6 +44,7 @@ public class Evenement {
     private List<Notification> notification;
 
     @OneToMany(mappedBy = "evenement")
+    @JsonIgnoreProperties("evenement")
     private List<Derouler> derouler;
 
     @OneToMany(mappedBy = "evenement")

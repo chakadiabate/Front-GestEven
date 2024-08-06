@@ -5,6 +5,8 @@ import com.kalanso.event.Service.ContexHolder;
 import com.kalanso.event.Service.Utilisateur_service;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -78,6 +80,27 @@ public class UtilisateurController {
         return contexHolder.utilisateur();
     }
 
+
+    @PutMapping("/updateProfile")
+    public ResponseEntity<Utilisateur> updateProfile(@RequestBody Utilisateur updatedUser) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof org.springframework.security.core.userdetails.User) {
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+            Utilisateur currentUser = utilisateurService.findByEmail(user.getUsername());
+
+            if (currentUser != null) {
+                currentUser.setNom(updatedUser.getNom());
+                currentUser.setPrenom(updatedUser.getPrenom());
+                currentUser.setEmail(updatedUser.getEmail());
+                currentUser.setTelephone(updatedUser.getTelephone());
+                // Ajoutez d'autres champs à mettre à jour si nécessaire
+
+                Utilisateur savedUser = utilisateurService.updateUtilisateur(currentUser); // Assurez-vous que cette méthode existe
+                return ResponseEntity.ok(savedUser);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // ou une autre réponse appropriée
+    }
 
 
 }

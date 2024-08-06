@@ -1,6 +1,7 @@
 package com.kalanso.event.Security;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Configuration
 public class SecurityConfig {
-
+    @Autowired
     private UserDetailServiceConfig userDetail;
 
     @Bean
@@ -31,10 +32,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((registry)->{
                     registry
-                            .requestMatchers("/gestEvent/user/CreerOrga").hasRole("GESTIONNAIRE")
-                            .requestMatchers("/gestEvent/event/addEvent/**", "/gestEvent/categories/**", "/gestEvent/lieu/**", "/gestEvent/prestateurs/**", "/gestEvent/reservation/**").hasAnyRole("ORGANISATEUR", "ADMIN", "GESTIONNAIRE")
-                            .requestMatchers("/gestEvent/**").hasRole("ADMIN")
-                            .anyRequest().authenticated();
+                            //.requestMatchers("/gestEvent/user/CreerOrga").hasRole("GESTIONNAIRE")
+                            //.requestMatchers("/gestEvent/user/Users").hasRole("ADMIN")
+                            //.requestMatchers("/gestEvent/event/addEvent/**", "/gestEvent/categories/**", "/gestEvent/lieu/**", "/gestEvent/prestateurs/**", "/gestEvent/reservation/**").hasAnyRole("ORGANISATEUR", "ADMIN", "GESTIONNAIRE")
+                            //.requestMatchers("/gestEvent/**").hasRole("ADMIN")
+                            .anyRequest().permitAll();
                 })
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(AbstractAuthenticationFilterConfigurer::disable)
