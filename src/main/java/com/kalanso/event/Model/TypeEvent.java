@@ -1,6 +1,7 @@
 package com.kalanso.event.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class TypeEvent {
     private String type;
   // @JsonBackReference(value = "users")
     @OneToMany(mappedBy = "typeevent")
-    @JsonIgnoreProperties("typeevent")
+    //@JsonIgnoreProperties("typeevent")
+    @JsonIgnore
     private List<Evenement> evenement;
 
     // Getters, setters, constructeurs

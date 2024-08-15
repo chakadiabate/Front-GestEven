@@ -34,9 +34,9 @@ public class Utilisateur {
     @JoinColumn(name = "role_id")
     private RoleUser role;
 
-    @OneToMany(mappedBy = "utilisateur")
-    @JsonIgnoreProperties("utilisateur")
-    private List<Evenement> evenement;
+    //@OneToMany(mappedBy = "utilisateur")
+    //@JsonIgnoreProperties("utilisateur")
+    //private List<Evenement> evenement;
 
     @OneToMany(mappedBy = "utilisateur")
     @JsonIgnoreProperties("utilisateur")
@@ -49,4 +49,6 @@ public class Utilisateur {
     @OneToMany(mappedBy = "utilisateur")
     @JsonIgnoreProperties("utilisateur")
     private List<Presta> presta;
+
+
 }

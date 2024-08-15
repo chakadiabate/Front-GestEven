@@ -7,7 +7,7 @@ import java.util.List;
 public interface Evenement_service{
 
     //Methode pour ajouter un evenement
-    String Ajout(Evenement evenement, Integer id);
+    String Ajout(Evenement evenement);
 
     //Methode pour afficher un evenement
     List<Evenement> Afficher();

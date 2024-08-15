@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/gestEvent/PriorityTask")
 @AllArgsConstructor
