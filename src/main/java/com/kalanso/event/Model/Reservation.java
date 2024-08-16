@@ -16,6 +16,10 @@ public class Reservation {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "id_billet", nullable = false)
+    private Billet billet;
+
+    @ManyToOne
     @JoinColumn(name = "statut_id")
     private StatutReservation statut;
 

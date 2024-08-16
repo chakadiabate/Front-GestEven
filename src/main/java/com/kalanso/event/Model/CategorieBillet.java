@@ -18,9 +18,15 @@ public class CategorieBillet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String category;
+
     @OneToMany(mappedBy = "category")
     @JsonIgnoreProperties("category")
     private List<Reservation> reservation;
+
+    @OneToMany(mappedBy = "categoryBillet")
+    @JsonIgnoreProperties("categoryBillet")
+    private List<Billet> billets;
+
     //private String description;
     // Getters, setters, constructeurs
 }

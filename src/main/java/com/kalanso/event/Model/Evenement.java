@@ -56,7 +56,12 @@ public class Evenement {
 
     @OneToMany(mappedBy = "evenement")
     @JsonIgnoreProperties({"utilisateur", "evenement"})
+
     private List<Reservation> reservation;
+    @JsonIgnore
+    @OneToMany(mappedBy = "evenement")
+    private List<Billet> billets;
+
 
     // Getters, setters, constructeurs
 }

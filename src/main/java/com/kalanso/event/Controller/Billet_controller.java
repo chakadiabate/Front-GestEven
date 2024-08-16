@@ -18,7 +18,7 @@ public class Billet_controller {
     private Billet_service billetService;
 
 
-    @GetMapping
+    @GetMapping("/afficherBillets")
     public List<Billet> getAllBillets() {
         return billetService.getAllBillets();
     }
@@ -29,6 +29,12 @@ public class Billet_controller {
         return billetOptional.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/Prix/{id}")
+    public int getUserById(@PathVariable Long id) {
+        return billetService.getPrixById(id);
+    }
+
 
     @PostMapping("AjoutBillet")
     public ResponseEntity<Billet> createBillet(@RequestBody Billet billet) {
@@ -42,7 +48,7 @@ public class Billet_controller {
         return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deleteBillet/{id}")
     public ResponseEntity<Void> deleteBillet(@PathVariable Long id) {
         billetService.deleteBillet(id);
         return ResponseEntity.noContent().build();

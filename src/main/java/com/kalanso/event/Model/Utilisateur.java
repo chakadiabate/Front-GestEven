@@ -23,7 +23,6 @@ public class Utilisateur {
     private String prenom;
     @Column(unique = true)
     private String email;
-
     @Column(unique = true)
     private String telephone;
 
