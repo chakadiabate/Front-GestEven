@@ -32,11 +32,11 @@ public class Utilisateur {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private RoleUser role;
-
-    //@OneToMany(mappedBy = "utilisateur")
-    //@JsonIgnoreProperties("utilisateur")
-    //private List<Evenement> evenement;
-
+// Evenement
+    @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnoreProperties("utilisateur")
+    private List<Evenement> evenement;
+// Fin Evenement
     @OneToMany(mappedBy = "utilisateur")
     @JsonIgnoreProperties("utilisateur")
     private List<Reservation> reservation;

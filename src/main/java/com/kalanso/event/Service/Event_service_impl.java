@@ -84,4 +84,9 @@ public class Event_service_impl implements Evenement_service {
                     return evenement_repo.save(p);
                 }).orElseThrow(()-> new RuntimeException("The event couldn't be deleted "));
     }
+
+    @Override
+    public Evenement EventProOrg(Integer id) {
+        return evenement_repo.findEventOrg(id);
+    }
 }

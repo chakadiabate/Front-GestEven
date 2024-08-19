@@ -31,24 +31,24 @@ public class Billet_controller {
     }
 
     @GetMapping("/Prix/{id}")
-    public int getUserById(@PathVariable Long id) {
+    public List<Integer> getUserById(@PathVariable Long id) {
         return billetService.getPrixById(id);
     }
 
 
-    @PostMapping("AjoutBillet")
+    @PostMapping("/AjoutBillet")
     public ResponseEntity<Billet> createBillet(@RequestBody Billet billet) {
         Billet createdBillet = billetService.createBillet(billet);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBillet);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Billet> updateBillet(@PathVariable Long id, @RequestBody Billet updatedBillet) {
         Billet updated = billetService.updateBillet(id, updatedBillet);
         return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("deleteBillet/{id}")
+    @DeleteMapping("/deleteBillet/{id}")
     public ResponseEntity<Void> deleteBillet(@PathVariable Long id) {
         billetService.deleteBillet(id);
         return ResponseEntity.noContent().build();

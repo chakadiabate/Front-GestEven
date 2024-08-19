@@ -41,4 +41,8 @@ public class EvenementController {
   public Evenement update(@PathVariable Integer id, @RequestBody Evenement evenement) {
     return evenementService.update(id, evenement);
     }
+    @GetMapping("/EventParOrg/{id}")
+    private Evenement EventOrg(@PathVariable Integer id) {
+        return evenementService.EventProOrg(id);
+    }
 }

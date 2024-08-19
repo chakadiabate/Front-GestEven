@@ -22,7 +22,7 @@ public class Billet_service {
     public List<Billet> getAllBillets() {
         return billetRepository.findAll();
     }
-    public int getPrixById(Long id) {
+    public List<Integer> getPrixById(Long id) {
         return billetRepository.findPrixBilletById(id);
     }
     public Optional<Billet> getBilletById(Long id) {

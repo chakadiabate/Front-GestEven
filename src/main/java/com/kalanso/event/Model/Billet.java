@@ -20,11 +20,10 @@ public class Billet {
     private List<Reservation> reservation;
 
     private int quantiteDisponible;
-     private int prix;
-    private LocalDate dateDebutVente;
-    private LocalDate dateFinVente;
+    private int prix;
+    private LocalDate date;
     private String description;
-    private String lienQrCode;
+    private int nbreBilletParPersonne;
 
      @ManyToOne
      @JoinColumn(name = "categorieBillet_id")

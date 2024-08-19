@@ -18,4 +18,6 @@ public interface Evenement_service{
     //Methode pour mettre à jour un evenement
     Evenement update(Integer id, Evenement evenement);
 
+    Evenement EventProOrg(Integer id);
+
 }

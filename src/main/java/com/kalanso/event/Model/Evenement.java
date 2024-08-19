@@ -35,12 +35,12 @@ public class Evenement {
     @JoinColumn(name = "typeEvent_id")
     @JsonIgnoreProperties("evenement")
     private TypeEvent typeevent;
-
-    //@ManyToOne
-    //@JoinColumn(name = "users_id")
-    //@JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
-    //private Utilisateur utilisateur;
-
+// User
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    @JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
+    private Utilisateur utilisateur;
+// Fin User
     @ManyToOne
     @JoinColumn(name = "categories")
     @JsonIgnoreProperties("evenement")
