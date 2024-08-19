@@ -1,11 +1,18 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -16,17 +23,29 @@ import java.util.TimeZone;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
     private Date date;
-    private Date datedebut ;
-    private Date datefin ;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private java.sql.Date datedebut ;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private java.sql.Date datefin ;
+
+    @JsonFormat(pattern="HH:mm")
     private LocalTime heure ;
     private String description;
+    //private Integer nombrePlace;
+
+    @Column(name = "image", columnDefinition="LONGBLOB")
+    @Lob
+    private byte[] image;
     //private Integer nombrePlace;
 
     private String lieu;
@@ -63,5 +82,13 @@ public class Evenement {
     private List<Billet> billets;
 
 
-    // Getters, setters, constructeurs
+    @Configuration
+    public class JacksonConfig {
+        @Bean
+        public ObjectMapper objectMapper() {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            return objectMapper;
+        }
+    }
 }

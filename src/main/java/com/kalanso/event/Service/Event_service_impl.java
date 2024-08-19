@@ -8,9 +8,11 @@ import com.lowagie.text.DocumentException;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +24,18 @@ public class Event_service_impl implements Evenement_service {
     private Utilisateur_repo utilisateur_repo;
     private RoleUserRepo roleUserRepo;
     private Derouler_repo derouler_repo;
+
+
+    public Evenement ajouterEvenement(Evenement evenement, MultipartFile image) throws IOException {
+        if (image != null && !image.isEmpty()) {
+            evenement.setImage(image.getBytes());
+        }
+        return evenement_repo.save(evenement);
+    }
+
+
+
+
 
     @Override
     public String Ajout(Evenement evenement) {
@@ -55,18 +69,18 @@ public class Event_service_impl implements Evenement_service {
         return "Evenement ajouter avec success";
     }
 
-    @Override
+    //@Override
     public List<Evenement> Afficher() {
         return evenement_repo.findAll();
     }
 
-    @Override
+    //@Override
     public String Delete(Integer id) {
         evenement_repo.deleteById(id);
         return "Event deleted with succes";
     }
 
-    @Override
+    //@Override
     public Evenement update(Integer id, Evenement evenement) {
         return evenement_repo.findById(id)
                 .map(p->{
@@ -88,5 +102,8 @@ public class Event_service_impl implements Evenement_service {
     @Override
     public Evenement EventProOrg(Integer id) {
         return evenement_repo.findEventOrg(id);
+    }
+    public Optional<Evenement> getNextEvent() {
+        return evenement_repo.findNextEvent();
     }
 }
