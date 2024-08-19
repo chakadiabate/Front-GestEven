@@ -11,9 +11,9 @@ import java.util.Random;
 @AllArgsConstructor
 public class GenerateRandomString {
 
-    String generateRandomString() {
-        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&é(-è_çà)=#{|!§/:?%µ£@]}[";
-        int LENGTH = 26;
+    public String generateRandomString() {
+        String CHARACTERS = "abcdefghijklmnopqrstuvwxyz0123456789";
+        int LENGTH = 12;
         Random RANDOM = new SecureRandom();
 
         StringBuilder sb = new StringBuilder(LENGTH);

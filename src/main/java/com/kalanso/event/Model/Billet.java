@@ -1,4 +1,5 @@
 package com.kalanso.event.Model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,8 +16,9 @@ public class Billet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany(mappedBy = "billet")
-    @JsonIgnoreProperties("billet")
+    @JsonBackReference
     private List<Reservation> reservation;
 
     private int quantiteDisponible;

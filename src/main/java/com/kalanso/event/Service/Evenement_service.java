@@ -20,5 +20,6 @@ public interface Evenement_service{
     //Evenement update(Integer id, Evenement evenement);
 
     Evenement EventProOrg(Integer id);
-    Optional<Evenement> getNextEvent();
+    Evenement getNextEvent();
+    Evenement getEvenementById(Integer id);
 }

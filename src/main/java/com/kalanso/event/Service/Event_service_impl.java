@@ -103,7 +103,12 @@ public class Event_service_impl implements Evenement_service {
     public Evenement EventProOrg(Integer id) {
         return evenement_repo.findEventOrg(id);
     }
-    public Optional<Evenement> getNextEvent() {
+    @Override
+    public Evenement getNextEvent() {
         return evenement_repo.findNextEvent();
+    }
+    @Override
+    public Evenement getEvenementById(Integer id) {
+        return evenement_repo.findById(id).orElse(null);
     }
 }

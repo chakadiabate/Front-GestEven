@@ -1,6 +1,6 @@
 package com.kalanso.event.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,36 +16,40 @@ public class Reservation {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_billet", nullable = false)
-    private Billet billet;
+    @JoinColumn(name = "statut_id")
+    @JsonManagedReference
+    private StatutReservation statut;
 
     @ManyToOne
-    @JoinColumn(name = "statut_id")
-    private StatutReservation statut;
+    @JoinColumn(name = "id_billet", nullable = false)
+    @JsonManagedReference
+    private Billet billet;
 
     //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "evenement_id")
-    @JsonIgnoreProperties("reservation, utilisateur")
+    @JsonManagedReference
     private Evenement evenement;
 
     private Date date_res = new Date();
 
+
+
     @ManyToOne
     @JoinColumn(name = "methodePaiement_id")
-    @JsonIgnoreProperties("reservation")
+    @JsonManagedReference
     private MethodePaiement methodePaiement;
 
-   //@JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
-    @JsonIgnoreProperties("reservation")
+    @JsonManagedReference
     private Utilisateur utilisateur;
 
     @ManyToOne
     @JoinColumn(name = "categories")
-    @JsonIgnoreProperties("reservation")
-     private CategorieBillet category;
+    @JsonManagedReference
+    private CategorieBillet category;
 }
 
 

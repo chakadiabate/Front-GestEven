@@ -15,9 +15,10 @@ public interface Evenement_repo extends JpaRepository<Evenement, Integer> {
     Evenement findEventOrg(@Param("id") int id);
    // @Query("SELECT COUNT(e) FROM Evenement e WHERE e.utilisateur.id = :id")
   //  int countEventsByUserId(@Param("id") int id);
-     @Query("SELECT e FROM Evenement e WHERE e.datefin>= CURRENT_DATE ORDER BY e.datefin ASC ")
-    Optional<Evenement> findNextEvent();
+     @Query("SELECT e FROM Evenement e WHERE e.datedebut>= CURRENT_DATE ORDER BY e.datedebut ASC LIMIT 1")
+    Evenement findNextEvent();
     //  int countEventsByUserId(@Param("id") int id);
+
 
 
 }

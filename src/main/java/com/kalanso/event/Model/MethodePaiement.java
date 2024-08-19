@@ -26,7 +26,7 @@ public class MethodePaiement {
 
 
     @OneToMany(mappedBy = "methodePaiement")
-    @JsonIgnoreProperties("methodePaiement")
+    @JsonBackReference
     private List<Reservation> reservation;
 
 }

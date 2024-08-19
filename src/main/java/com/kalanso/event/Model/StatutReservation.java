@@ -23,7 +23,7 @@ public class StatutReservation {
     private  Long Id;
     private String statut;
     @OneToMany(mappedBy = "statut")
-    @JsonIgnore
+    @JsonBackReference
     private List<Reservation> reservation;
 
 }

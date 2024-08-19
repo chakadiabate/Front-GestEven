@@ -39,9 +39,9 @@ public class Notif_service_Reservation_impl {
 
     public void sendMailWelcome(Notification notification) throws MessagingException, IOException, DocumentException, WriterException{
 
-        LocalDateTime debutEventDateTime = LocalDateTime.ofInstant(notification.getEvenement().getDatedebut().toInstant(), ZoneId.systemDefault());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss"); // Définir le format souhaité ici
-        String heureFormatee = debutEventDateTime.format(formatter);
+        //LocalDateTime debutEventDateTime = LocalDateTime.ofInstant(notification.getEvenement().getDatedebut().toInstant(), ZoneId.systemDefault());
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss"); // Définir le format souhaité ici
+        //String heureFormatee = debutEventDateTime.format(formatter);
 
         String content ="<!DOCTYPE html>\n" +
                 "<html>\n" +
@@ -68,7 +68,7 @@ public class Notif_service_Reservation_impl {
                 "            <ul>\n" +
                 "                <li>Date : " + notification.getEvenement().getDatedebut() + "</li>\n" +
                 "                <li>Lieu : Stade du 26 Mars</li>\n" +
-                "                <li>Heure : "+ heureFormatee + "</li>\n" +
+                "                <li>Heure : "+ notification.getEvenement().getDatedebut() + "</li>\n" +
                 "            </ul>\n" +
                 "            <p>Assurez-vous de confirmer votre présence en répondant à cet e-mail. Nous avons hâte de vous voir!</p>\n" +
                 "        </div>\n" +
@@ -259,12 +259,12 @@ public class Notif_service_Reservation_impl {
         InputStreamSource qrCodeSource = new ByteArrayResource(qrCodeImage);
 
         //String qrCodeFileName = "./uploads/qrcode.png"; // Remplacez par le chemin de votre dossier
-        String qrCodeFileName = "D:/GestEvent_SRC/qrcode.png"; // Remplacez par le chemin de votre dossier
+       // String qrCodeFileName = "D:/GestEvent_SRC/qrcode.png"; // Remplacez par le chemin de votre dossier
 
         // Convert QR code image to Base64 encoded string
-        String qrCodeBase64 = Base64.getEncoder().encodeToString(qrCodeImage);
-        String qrCodeDataUri = "data:image/png;base64," + qrCodeBase64;
-        Files.write(Paths.get(qrCodeFileName), qrCodeImage);
+       // String qrCodeBase64 = Base64.getEncoder().encodeToString(qrCodeImage);
+       // String qrCodeDataUri = "data:image/png;base64," + qrCodeBase64;
+       // Files.write(Paths.get(qrCodeFileName), qrCodeImage);
 
         String Content_Qrcode1 = "<!DOCTYPE html>\n" +
                 "<html>\n" +
@@ -332,7 +332,7 @@ public class Notif_service_Reservation_impl {
                 "        <div class=\"ticket-container\">\n" +
                 "            <h2>" + notification.getEvenement().getNom() + "</h2>\n" +
                 "            <div class=\"ticket\">\n" +
-                "                <img src='" + qrCodeDataUri + "' alt=\"Code QR du Ticket\"></img>\n" +
+                "                <img src='' alt=\"Code QR du Ticket\"></img>\n" +
                 "                <div class=\"ticket-details\">\n" +
                 "                    <p>Nom : " + contexHolder.utilisateur().getNom() + "</p>\n" +
                 "                    <p>Email : " + contexHolder.utilisateur().getEmail() + "</p>\n" +

@@ -1,9 +1,6 @@
 package com.kalanso.event.Model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.*;
@@ -57,7 +54,8 @@ public class Evenement {
 // User
     @ManyToOne
     @JoinColumn(name = "users_id")
-    @JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
+    //@JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
+    @JsonManagedReference
     private Utilisateur utilisateur;
 // Fin User
     @ManyToOne
@@ -74,10 +72,10 @@ public class Evenement {
     private List<Derouler> derouler;
 
     @OneToMany(mappedBy = "evenement")
-    @JsonIgnoreProperties({"utilisateur", "evenement"})
-
+    @JsonBackReference
     private List<Reservation> reservation;
-    @JsonIgnore
+
+    @JsonBackReference
     @OneToMany(mappedBy = "evenement")
     private List<Billet> billets;
 

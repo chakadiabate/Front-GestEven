@@ -111,11 +111,19 @@ public class EvenementController {
         return evenementService.EventProOrg(id);
     }
 
-    @GetMapping("/next-event")
-    public ResponseEntity<Evenement> nextEvent() {
-        Optional<Evenement> nextEvent= eventService.getNextEvent();
-        return nextEvent.map(ResponseEntity::ok)
-                .orElseGet(()->ResponseEntity.notFound().build());
+    @GetMapping("/next_event")
+    public Evenement nextEvent() {
+         return eventService.getNextEvent();
     }
+    @GetMapping("EventById/{id}")
+    public ResponseEntity<Evenement> getEvenementById(@PathVariable Integer id) {
+        Evenement evenement = eventService.getEvenementById(id);
+        if (evenement != null) {
+            return ResponseEntity.ok(evenement);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }

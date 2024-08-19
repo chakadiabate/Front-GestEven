@@ -1,7 +1,6 @@
 package com.kalanso.event.Service;
 
 import com.google.zxing.WriterException;
-import com.kalanso.event.Model.Evenement;
 import com.kalanso.event.Model.Notification;
 import com.kalanso.event.Model.Reservation;
 import com.kalanso.event.Model.StatutReservation;
@@ -27,9 +26,10 @@ public class Reservation_serviceImpl implements Reservation_service {
     private Notif_service_Reservation_impl notifServiceReservationImpl;
     private StatutReservationRepo statutRepo;
     private ContexHolder contexHolder;
+    private QRCodeService qrCodeService;
 
     @Override
-    public Reservation Reserver(Reservation reservation) {
+    public Reservation Reserver(Reservation reservation) throws IOException, WriterException {
         StatutReservation statutReservation = statutRepo.findByStatut("ACTIVE");
         reservation.setUtilisateur(contexHolder.utilisateur());
         reservation.setDate_res(new Date());
@@ -37,6 +37,8 @@ public class Reservation_serviceImpl implements Reservation_service {
         //Integer evenement_id = reservation.getEvenement().getId();
 
         reservationRepo.save(reservation);
+
+        qrCodeService.StoreQrCode(reservation);
 
         System.out.println(reservation.getEvenement());
         evenement_repo.findById(reservation.getEvenement().getId()).map(ev->{
@@ -90,4 +92,16 @@ public class Reservation_serviceImpl implements Reservation_service {
     public List<Reservation> getAllReservations() {
         return reservationRepo.findAll();
     }
+
+    @Override
+    public List<Reservation> getUserReservation(String email) {
+        return reservationRepo.findUserEmail(email);
+    }
+
+    @Override
+    public Reservation afficher1(Long id) {
+        return reservationRepo.findById(id).get();
+    }
+
+
 }

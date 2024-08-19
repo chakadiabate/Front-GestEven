@@ -1,12 +1,12 @@
 package com.kalanso.event.Controller;
 
+import com.google.zxing.WriterException;
 import com.kalanso.event.Model.Reservation;
 import com.kalanso.event.Service.Reservation_service;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins="*")
@@ -19,7 +19,7 @@ public class ReservationController {
     private Reservation_service reservationService;
 
     @PostMapping("/reserver")
-    public String Reserver(@RequestBody Reservation reservation) {
+    public String Reserver(@RequestBody Reservation reservation) throws IOException, WriterException {
         reservationService.Reserver(reservation);
         return "Reservation Effectué avec succès !!!";
     }
@@ -30,8 +30,22 @@ public class ReservationController {
         return reservationService.getAllReservations();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200/")
+    @GetMapping("/userReservation")
+    public List<Reservation> getUserReservation(@RequestParam String email){
+        return reservationService.getUserReservation(email);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200/")
+    @GetMapping("/AfficherReservation/{id}")
+    public Reservation Afficher1(@PathVariable Long id) {
+        return reservationService.afficher1(id);
+    }
+
     @PatchMapping("/AnnulerReservation")
     public Reservation CancelReservation(@RequestParam Long id) {
         return reservationService.AnnulerReservation(id);
     }
+
+
 }
