@@ -1,6 +1,7 @@
 package com.kalanso.event.Service;
 
 import com.google.zxing.WriterException;
+import com.kalanso.event.Model.Evenement;
 import com.kalanso.event.Model.Notification;
 import com.kalanso.event.Model.Reservation;
 import com.kalanso.event.Model.StatutReservation;
@@ -94,7 +95,7 @@ public class Reservation_serviceImpl implements Reservation_service {
     }
 
     @Override
-    public List<Reservation> getUserReservation(String email) {
+    public List<Evenement> getUserReservation(String email) {
         return reservationRepo.findUserEmail(email);
     }
 

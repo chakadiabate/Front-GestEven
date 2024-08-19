@@ -1,6 +1,7 @@
 package com.kalanso.event.Controller;
 
 import com.google.zxing.WriterException;
+import com.kalanso.event.Model.Evenement;
 import com.kalanso.event.Model.Reservation;
 import com.kalanso.event.Service.Reservation_service;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ public class ReservationController {
 
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/userReservation")
-    public List<Reservation> getUserReservation(@RequestParam String email){
+    public List<Evenement> getUserReservation(@RequestParam String email){
         return reservationService.getUserReservation(email);
     }
 
