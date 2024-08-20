@@ -2,6 +2,7 @@ package com.kalanso.event.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -32,16 +33,17 @@ public class Utilisateur {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
+    @JsonBackReference("usersRole")
     private RoleUser role;
 // Evenement
     @OneToMany(mappedBy = "utilisateur")
     //@JsonIgnoreProperties("utilisateur, notification")
-    @JsonBackReference
+    @JsonBackReference("eventU")
     private List<Evenement> evenement;
 // Fin Evenement
     @OneToMany(mappedBy = "utilisateur")
     //@JsonIgnoreProperties("utilisateur")
-    @JsonBackReference
+    @JsonManagedReference("UserR")
     private List<Reservation> reservation;
 
     @OneToMany(mappedBy = "utilisateur")

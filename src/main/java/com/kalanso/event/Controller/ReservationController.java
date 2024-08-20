@@ -25,6 +25,18 @@ public class ReservationController {
         return "Reservation Effectué avec succès !!!";
     }
 
+
+    /*@PostMapping("/reserver")
+    public ResponseEntity<Reservation> Reserver(@RequestPart("reservation") String reservationJson) throws IOException, WriterException {
+
+        Reservation reservation = objectMapper.readValue(reservationJson, Reservation.class);
+        System.out.println("Evenement Object: " + reservation);
+        Reservation nouvelReservation = reservationService.Reserver(reservation);
+        System.out.println("Nouvel Evenement: " + nouvelReservation);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nouvelReservation);
+
+    }*/
+
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/ListReservation")
     public List<Reservation> getAllReservations() {

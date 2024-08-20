@@ -55,7 +55,7 @@ public class Evenement {
     @ManyToOne
     @JoinColumn(name = "users_id")
     //@JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
-    @JsonManagedReference
+    @JsonBackReference("eventU")
     private Utilisateur utilisateur;
 // Fin User
     @ManyToOne
@@ -72,10 +72,10 @@ public class Evenement {
     private List<Derouler> derouler;
 
     @OneToMany(mappedBy = "evenement")
-    @JsonBackReference
+    @JsonManagedReference("eventR")
     private List<Reservation> reservation;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "evenement")
     private List<Billet> billets;
 

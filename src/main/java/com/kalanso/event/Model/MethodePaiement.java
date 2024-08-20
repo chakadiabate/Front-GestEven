@@ -26,7 +26,7 @@ public class MethodePaiement {
 
 
     @OneToMany(mappedBy = "methodePaiement")
-    @JsonBackReference
+    @JsonManagedReference("methodePaieR")
     private List<Reservation> reservation;
 
 }

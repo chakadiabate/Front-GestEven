@@ -1,6 +1,7 @@
 package com.kalanso.event.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class Billet {
     private Long id;
 
     @OneToMany(mappedBy = "billet")
-    @JsonBackReference
+    @JsonManagedReference("billetR")
     private List<Reservation> reservation;
 
     private int quantiteDisponible;
@@ -30,6 +31,7 @@ public class Billet {
      @ManyToOne
      @JoinColumn(name = "categorieBillet_id")
      private CategorieBillet categoryBillet;
+
      @ManyToOne
      @JoinColumn(name = "event_id")
      private Evenement evenement;

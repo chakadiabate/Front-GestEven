@@ -20,7 +20,7 @@ public class CategorieBillet {
     private String category;
 
     @OneToMany(mappedBy = "category")
-    @JsonBackReference
+    @JsonManagedReference("categoryR")
     private List<Reservation> reservation;
 
     @OneToMany(mappedBy = "categoryBillet")

@@ -22,8 +22,9 @@ public class StatutReservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
     private String statut;
+
     @OneToMany(mappedBy = "statut")
-    @JsonBackReference
+    @JsonManagedReference("StatutR")
     private List<Reservation> reservation;
 
 }
