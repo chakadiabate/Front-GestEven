@@ -18,10 +18,10 @@ public class TypeEvent {
     private Integer id;
     private String type;
   // @JsonBackReference(value = "users")
-    @OneToMany(mappedBy = "typeevent")
+    //@OneToMany(mappedBy = "typeevent")
     //@JsonIgnoreProperties("typeevent")
-    @JsonIgnore
-    private List<Evenement> evenement;
+   // @JsonIgnore
+   // private List<Evenement> evenement;
 
     // Getters, setters, constructeurs
 }

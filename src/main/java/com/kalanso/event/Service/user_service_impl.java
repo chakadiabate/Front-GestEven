@@ -8,7 +8,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -20,7 +22,12 @@ public class user_service_impl implements Utilisateur_service {
     private RoleUserRepo roleUserRepo;
 
     @Override
-    public Client creerClient(Client client) {
+    public Client creerClient(Client client, MultipartFile image) throws IOException {
+        if (image != null && !image.isEmpty()) {
+            client.setImage(image.getBytes());
+            //client.setRole();
+        }
+
         client.setMotDePasse(passwordEncoder.encode(client.getMotDePasse()));
         return utilisateurRepo.save(client);
     }
@@ -67,7 +74,7 @@ public class user_service_impl implements Utilisateur_service {
                     p.setPrenom(utilisateur.getPrenom());
                     p.setEmail(utilisateur.getEmail());
                     p.setTelephone(utilisateur.getTelephone());
-                    p.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
+                    //p.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
                     p.setRole(utilisateur.getRole());
                     return utilisateurRepo.save(p);
         }).orElseThrow(()-> new RuntimeException("Erreur lors de la mise à jour"));

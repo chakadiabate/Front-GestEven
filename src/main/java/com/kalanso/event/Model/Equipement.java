@@ -22,7 +22,7 @@ public class Equipement {
 
     @ManyToOne
     @JoinColumn(name = "presta_id")
-    @JsonIgnoreProperties("equipement")
+    //@JsonIgnoreProperties("equipement")
     private Presta presta;
 
 

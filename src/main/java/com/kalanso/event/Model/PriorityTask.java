@@ -23,8 +23,8 @@ public class PriorityTask {
     private  Long id;
     private String priority;
 
-    @OneToMany(mappedBy = "priority")
-    @JsonIgnore
-    private List<Taches> tache;
+    //@OneToMany(mappedBy = "priority")
+    //@JsonIgnore
+    //private List<Taches> tache;
 
 }

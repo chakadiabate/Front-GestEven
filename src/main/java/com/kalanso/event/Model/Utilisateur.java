@@ -2,6 +2,7 @@ package com.kalanso.event.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -32,25 +33,30 @@ public class Utilisateur {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
+    //@JsonManagedReference("usersRole")
     private RoleUser role;
+    @Column(name = "image", columnDefinition="LONGBLOB")
+    @Lob
+    private byte[] image;
+
 // Evenement
-    @OneToMany(mappedBy = "utilisateur")
+   // @OneToMany(mappedBy = "utilisateur")
     //@JsonIgnoreProperties("utilisateur, notification")
-    @JsonBackReference
-    private List<Evenement> evenement;
+   // @JsonManagedReference("eventU")
+  //  private List<Evenement> evenement;
 // Fin Evenement
-    @OneToMany(mappedBy = "utilisateur")
+   // @OneToMany(mappedBy = "utilisateur")
     //@JsonIgnoreProperties("utilisateur")
-    @JsonBackReference
-    private List<Reservation> reservation;
+  //  @JsonManagedReference("bookR")
+  //  private List<Reservation> reservation;
 
-    @OneToMany(mappedBy = "utilisateur")
-    @JsonIgnoreProperties("utilisateur")
-    private List<Notification> notification;
+   // @OneToMany(mappedBy = "utilisateur")
+    //@JsonManagedReference("notifR")
+    //private List<Notification> notification;
 
-    @OneToMany(mappedBy = "utilisateur")
-    @JsonIgnoreProperties("utilisateur")
-    private List<Presta> presta;
+    //@OneToMany(mappedBy = "utilisateur")
+    //@JsonManagedReference("prestaR")
+    //private List<Presta> presta;
 
 
 }

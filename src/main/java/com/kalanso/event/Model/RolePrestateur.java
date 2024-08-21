@@ -19,8 +19,8 @@ public class RolePrestateur {
     private Long id;
     private String role;
 
-    @JsonBackReference(value = "prestateurs")
-    @JsonIgnoreProperties("rolePrestateur")
-    @OneToMany(mappedBy = "rolePrestateur")
-    private List<Presta> presta;
+   // @JsonBackReference(value = "prestateurs")
+    //@JsonIgnoreProperties("rolePrestateur")
+   // @OneToMany(mappedBy = "rolePrestateur")
+    //private List<Presta> presta;
 }

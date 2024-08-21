@@ -49,35 +49,35 @@ public class Evenement {
 
     @ManyToOne
     @JoinColumn(name = "typeEvent_id")
-    @JsonIgnoreProperties("evenement")
+    //@JsonIgnoreProperties("evenement")
     private TypeEvent typeevent;
 // User
     @ManyToOne
     @JoinColumn(name = "users_id")
     //@JsonIgnoreProperties({"evenement", "reservation", "notification", "presta"})
-    @JsonManagedReference
+   // @JsonBackReference("eventU")
     private Utilisateur utilisateur;
 // Fin User
     @ManyToOne
     @JoinColumn(name = "categories")
-    @JsonIgnoreProperties("evenement")
+   // @JsonIgnoreProperties("evenement")
     private CategorieEvent category;
 
-    @OneToMany(mappedBy = "evenement")
-    @JsonIgnoreProperties({"utilisateur", "evenement"})
-    private List<Notification> notification;
+    //@OneToMany(mappedBy = "evenement")
+    //@JsonIgnoreProperties({"utilisateur", "evenement"})
+    //private List<Notification> notification;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "evenement")
-    private List<Derouler> derouler;
+   // @JsonIgnore
+    //@OneToMany(mappedBy = "evenement")
+    //private List<Derouler> derouler;
 
-    @OneToMany(mappedBy = "evenement")
-    @JsonBackReference
-    private List<Reservation> reservation;
+    //@OneToMany(mappedBy = "evenement")
+    //@JsonManagedReference("eventR")
+    //private List<Reservation> reservation;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "evenement")
-    private List<Billet> billets;
+    //@JsonIgnore
+    //@OneToMany(mappedBy = "evenement")
+    //private List<Billet> billets;
 
 
     @Configuration

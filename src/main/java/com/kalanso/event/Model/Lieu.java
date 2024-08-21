@@ -19,8 +19,8 @@ public class Lieu {
     private String salle;
     private Integer capacite;
 
-    @OneToMany(mappedBy = "lieu")
-    @JsonIgnoreProperties("lieu")
-    private List<Derouler> derouler;
+    //@OneToMany(mappedBy = "lieu")
+    //@JsonIgnoreProperties("lieu")
+    //private List<Derouler> derouler;
     // Getters, setters, constructeurs
 }

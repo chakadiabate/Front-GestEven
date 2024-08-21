@@ -1,6 +1,7 @@
 package com.kalanso.event.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class StatutQrcode {
 
     private String statut;
 
-    @OneToMany(mappedBy = "statutQrcode")
-    @JsonBackReference
-    private List<QrCode> qrcode;
+    //@OneToMany(mappedBy = "statutQrcode")
+   // @JsonManagedReference("satatutQr")
+    //private List<QrCode> qrcode;
 }

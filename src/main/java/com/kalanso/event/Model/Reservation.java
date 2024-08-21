@@ -1,11 +1,13 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,38 +19,41 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "statut_id")
-    @JsonManagedReference
+    //@JsonBackReference("StatutR")
     private StatutReservation statut;
 
     @ManyToOne
-    @JoinColumn(name = "id_billet", nullable = false)
-    @JsonManagedReference
+    @JoinColumn(name = "id_billet", nullable = true)
+  //  @JsonBackReference("billetR")
     private Billet billet;
 
     //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "evenement_id")
-    @JsonManagedReference
+    //@JsonBackReference("eventR")
     private Evenement evenement;
 
     private Date date_res = new Date();
 
+    //@OneToMany(mappedBy = "reservation")
+    //@JsonManagedReference("bookQr")
+    //private List<QrCode> qrCode;
 
 
     @ManyToOne
     @JoinColumn(name = "methodePaiement_id")
-    @JsonManagedReference
+    //@JsonBackReference("methodePaieR")
     private MethodePaiement methodePaiement;
 
     //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
-    @JsonManagedReference
+    //@JsonBackReference("bookR")
     private Utilisateur utilisateur;
 
     @ManyToOne
     @JoinColumn(name = "categories")
-    @JsonManagedReference
+    //@JsonBackReference("categoryR")
     private CategorieBillet category;
 }
 

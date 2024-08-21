@@ -23,12 +23,12 @@ public class Derouler {
 
     @ManyToOne
     @JoinColumn(name = "lieu_id")
-    @JsonIgnoreProperties("derouler")
+   // @JsonIgnoreProperties("derouler")
     private Lieu lieu;
 
     @ManyToOne
     @JoinColumn(name = "evenement_id")
-    @JsonIgnoreProperties("derouler")
+  //  @JsonIgnoreProperties("derouler")
     private Evenement evenement;
 
 

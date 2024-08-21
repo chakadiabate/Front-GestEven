@@ -1,5 +1,6 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,17 +26,17 @@ public class QrCode {
 
     @ManyToOne
     @JoinColumn(name = "statutQrcode_id")
-    @JsonManagedReference
+    @JsonBackReference("satatutQr")
     private StatutQrcode statutQrcode;
 
     @ManyToOne
     @JoinColumn(name = "categorieBillet_id")
-    @JsonManagedReference
+    @JsonBackReference("catQr")
     private CategorieBillet category;
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")
-    @JsonManagedReference
+    @JsonBackReference("bookQr")
     private Reservation reservation;
 
 }

@@ -1,5 +1,6 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,11 +19,12 @@ public class Notification {
     private Integer id;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    //@JsonBackReference("notifR")
     private Utilisateur utilisateur;
 
     @ManyToOne
     @JoinColumn(name = "evenement_id")
-    @JsonIgnoreProperties("evenement")
+    //@JsonIgnoreProperties("evenement")
     private Evenement evenement;
 
     private String sujet;
@@ -30,6 +32,7 @@ public class Notification {
 
     @ManyToOne
     @JoinColumn(name = "statutEnvoi_id")
+    //@JsonBackReference("notifR")
     private StatutEnvoi status;
 
     private String message;

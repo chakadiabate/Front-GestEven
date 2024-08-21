@@ -1,6 +1,7 @@
 package com.kalanso.event.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -20,7 +21,8 @@ public class StatutEnvoi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long Id;
     private String statut;
-    @OneToMany(mappedBy = "status")
-    private List<Notification> notification;
+   // @OneToMany(mappedBy = "status")
+    //@JsonManagedReference("notifR")
+   // private List<Notification> notification;
 
 }

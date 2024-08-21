@@ -60,7 +60,7 @@ public class Notif_service_Reservation_impl {
                 "<body>\n" +
                 "    <div class=\"container\">\n" +
                 "        <div class=\"header\">\n" +
-                "            <h1>Bienvenue à Notre Événement, " + contexHolder.utilisateur().getNom() + "!</h1>\n" +
+                "            <h1>Bienvenue à Notre Événement, " + notification.getUtilisateur().getNom() + "!</h1>\n" +
                 "        </div>\n" +
                 "        <div class=\"content\">\n" +
                 "            <p>Nous sommes ravis de vous inviter à notre événement spécial. Préparez-vous pour une expérience inoubliable avec des sessions interactives, des conférenciers de renommée mondiale, et bien plus encore.</p>\n" +
@@ -334,8 +334,8 @@ public class Notif_service_Reservation_impl {
                 "            <div class=\"ticket\">\n" +
                 "                <img src='' alt=\"Code QR du Ticket\"></img>\n" +
                 "                <div class=\"ticket-details\">\n" +
-                "                    <p>Nom : " + contexHolder.utilisateur().getNom() + "</p>\n" +
-                "                    <p>Email : " + contexHolder.utilisateur().getEmail() + "</p>\n" +
+                "                    <p>Nom : " + notification.getUtilisateur().getNom() + "</p>\n" +
+                "                    <p>Email : " + notification.getUtilisateur().getEmail() + "</p>\n" +
                 "                    <p>Date : " + notification.getEvenement().getDate() + "</p>\n" +
                 "                    <p>Numéro de Ticket : 123456789</p>\n" +
                 "                </div>\n" +
@@ -416,8 +416,8 @@ public class Notif_service_Reservation_impl {
                 "            <div class=\"ticket\">\n" +
                 "                <img src='cid:qrcode' alt=\"Code QR du Ticket\"></img>\n" +
                 "                <div class=\"ticket-details\">\n" +
-                "                    <p>Nom : "+ contexHolder.utilisateur().getNom() + "</p>\n" +
-                "                    <p>Email : "+ contexHolder.utilisateur().getEmail() + "</p>\n" +
+                "                    <p>Nom : "+ notification.getUtilisateur().getNom() + "</p>\n" +
+                "                    <p>Email : "+ notification.getUtilisateur().getEmail() + "</p>\n" +
                 "                    <p>Date : " + notification.getEvenement().getDate() + "</p>\n" +
                 "                    <p>Numéro de Ticket : 123456789</p>\n" +
                 "                </div>\n" +

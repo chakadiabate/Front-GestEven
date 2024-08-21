@@ -17,6 +17,6 @@ public class CategorieEvent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String category;
-    @OneToMany(mappedBy = "category")
-    private List<Evenement> evenement;
+   // @OneToMany(mappedBy = "category")
+    //private List<Evenement> evenement;
 }

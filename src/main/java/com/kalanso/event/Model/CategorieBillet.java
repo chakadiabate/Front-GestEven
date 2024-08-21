@@ -19,13 +19,17 @@ public class CategorieBillet {
     private Integer id;
     private String category;
 
-    @OneToMany(mappedBy = "category")
-    @JsonBackReference
-    private List<Reservation> reservation;
+    //@OneToMany(mappedBy = "category")
+    //@JsonManagedReference("categoryR")
+     //List<Reservation> reservation;
 
-    @OneToMany(mappedBy = "categoryBillet")
-    @JsonIgnoreProperties("categoryBillet")
-    private List<Billet> billets;
+    //@OneToMany(mappedBy = "category")
+    //@JsonManagedReference("catQr")
+    //private List<QrCode> qrCode;
+
+   // @OneToMany(mappedBy = "categoryBillet")
+    //@JsonIgnoreProperties("categoryBillet")
+    //private List<Billet> billets;
 
     //private String description;
     // Getters, setters, constructeurs
