@@ -1,12 +1,10 @@
 package com.kalanso.event.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,12 +18,12 @@ public class Billet {
     private Long id;
 
     //@OneToMany(mappedBy = "billet")
-    //@JsonManagedReference("billetR")
+    //@JsonBackReference
     //private List<Reservation> reservation;
 
     private int quantiteDisponible;
     private int prix;
-    private Date date;
+    private LocalDate date;
     private String description;
     private int nbreBilletParPersonne;
 
