@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.TimeZone;
@@ -28,7 +29,8 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
-    private Date date;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private java.util.Date date = new java.util.Date();
     @JsonFormat(pattern="yyyy-MM-dd")
     private java.sql.Date datedebut ;
 

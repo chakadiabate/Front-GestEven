@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,13 +25,13 @@ public class Billet {
 
     private int quantiteDisponible;
     private int prix;
-    private LocalDate date;
+    private Date date;
     private String description;
     private int nbreBilletParPersonne;
 
      @ManyToOne
      @JoinColumn(name = "categorieBillet_id")
-     //@JsonBackReference("")
+     @JsonBackReference("categoryBillet")
      private CategorieBillet categoryBillet;
 
      @ManyToOne

@@ -38,5 +38,4 @@ public class QrCode {
     @JoinColumn(name = "reservation_id")
     @JsonBackReference("bookQr")
     private Reservation reservation;
-
 }
