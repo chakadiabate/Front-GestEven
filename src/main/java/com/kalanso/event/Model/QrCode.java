@@ -19,23 +19,22 @@ public class QrCode {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nameFile;
-    private String filepath;
+    @Lob
+    @Column(columnDefinition="LONGBLOB")
+    private byte[] file;
 
     private String ticketId ;
     private String prix ;
 
     @ManyToOne
     @JoinColumn(name = "statutQrcode_id")
-    @JsonBackReference("satatutQr")
     private StatutQrcode statutQrcode;
 
     @ManyToOne
     @JoinColumn(name = "categorieBillet_id")
-    @JsonBackReference("catQr")
     private CategorieBillet category;
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")
-    @JsonBackReference("bookQr")
     private Reservation reservation;
 }

@@ -52,16 +52,16 @@ public class QRCodeService {
 
         String qrCodeText = "http://localhost:8080/gestEvent/reservation/AfficherReservation/"+reservation1.getId()+"";
 
-        byte[] qrCodeImage = generateQRCode(qrCodeText, 125, 125);
-        String qrCodeFilePath = "D:\\GestEvent_SRC1\\" + reservation1.getId() + ".png"; // Remplacez par le chemin de votre dossier
-        Files.write(Paths.get(qrCodeFilePath), qrCodeImage);
+        byte[]  qrCodeImage = generateQRCode(qrCodeText, 125, 125);
+        //String qrCodeFilePath = "D:\\GestEvent_SRC1\\" + reservation1.getId() + ".png"; // Remplacez par le chemin de votre dossier
+        //Files.write(Paths.get(qrCodeFilePath), qrCodeImage);
 
         StatutQrcode statutQrcode = statutQrcodeRepo.findByStatut("ACTIF");
         String random = generateRandomString.generateRandomString();
         QrCode qrCode = QrCode.builder()
                 .nameFile("" + reservation1.getId() + ".png")
                 .reservation(reservation)
-                .filepath(qrCodeFilePath)
+                .file(qrCodeImage)
                 .statutQrcode(statutQrcode)
                 .ticketId(random)
                 .build();
@@ -78,11 +78,11 @@ public class QRCodeService {
         return image; // or handle as appropriate
     }*/
 
-    public byte[] GetQrCodeImage(String fileName) throws IOException {
+   /* public byte[] GetQrCodeImage(String fileName) throws IOException {
         String path = qrCode_repo.findByNameFile(fileName).getFilepath();
         System.out.println(path);
         return Files.readAllBytes(new File(path).toPath());
-    }
+    }*/
 
     public List<QrCode> GetQrCodeName(Long id, String email) {
         return qrCode_repo.findTickets(id, email);

@@ -73,19 +73,6 @@ public class EvenementController {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     //@PostMapping("/addEvent")
     //private String ajout (@RequestBody Evenement evenement){
         //return evenementService.Ajout(evenement);
@@ -102,9 +89,9 @@ public class EvenementController {
         return eventService.Delete(id);
     }
 
-  @PutMapping("/update/{id}")
-  public Evenement update(@PathVariable Integer id, @RequestBody Evenement evenement) {
-    return eventService.update(id, evenement);
+    @PutMapping("/update/{id}")
+    public Evenement update(@PathVariable Integer id, @RequestBody Evenement evenement) {
+        return eventService.update(id, evenement);
     }
     @GetMapping("/EventParOrg/{id}")
     private Evenement EventOrg(@PathVariable Integer id) {

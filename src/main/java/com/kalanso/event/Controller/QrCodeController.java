@@ -20,13 +20,13 @@ public class QrCodeController {
     private QRCodeService qrCodeService;
 
 
-    @GetMapping("/fileSystem/image")
+    /*@GetMapping("/fileSystem/image")
     public ResponseEntity<?> downloadImageFromFileSystem(@RequestParam String fileName) throws IOException {
         byte[] imageData=qrCodeService.GetQrCodeImage(fileName);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf("image/png"))
                 .body(imageData);
-    }
+    }*/
 
     @GetMapping("/fileSystem/{email}/List")
     public List<QrCode> GetQrCodeName(@RequestParam Long id, @PathVariable String email) {

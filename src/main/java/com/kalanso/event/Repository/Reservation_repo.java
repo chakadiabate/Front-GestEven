@@ -1,6 +1,5 @@
 package com.kalanso.event.Repository;
 
-import com.kalanso.event.Model.Billet;
 import com.kalanso.event.Model.Evenement;
 import com.kalanso.event.Model.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
