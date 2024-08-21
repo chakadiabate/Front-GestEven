@@ -27,9 +27,6 @@ public class CategorieBillet {
     //@JsonManagedReference("catQr")
     //private List<QrCode> qrCode;
 
-   @OneToMany(mappedBy = "categoryBillet")
-   @JsonManagedReference("categoryBillet")
-   private List<Billet> billets;
 
     //private String description;
     // Getters, setters, constructeurs

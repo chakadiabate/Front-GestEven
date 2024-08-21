@@ -45,4 +45,8 @@ public class Billet_service {
     public void deleteBillet(Long id) {
         billetRepository.deleteById(id);
     }
+
+    public List<Billet> getcategoryByeventId(Long id) {
+        return billetRepository.findcategoryByeventId(id);
+    }
 }

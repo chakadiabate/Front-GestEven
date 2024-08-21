@@ -23,6 +23,8 @@ public class Billet_controller {
         return billetService.getAllBillets();
     }
 
+
+
     @GetMapping("/{id}")
     public ResponseEntity<Billet> getBilletById(@PathVariable Long id) {
         Optional<Billet> billetOptional = billetService.getBilletById(id);
@@ -33,6 +35,11 @@ public class Billet_controller {
     @GetMapping("/Prix/{id}")
     public List<Integer> getUserById(@PathVariable Long id) {
         return billetService.getPrixById(id);
+    }
+
+    @GetMapping("/getcategoryByevtId/{id}")
+    public List<Billet> getcatById(@PathVariable Long id) {
+        return billetService.getcategoryByeventId(id);
     }
 
 

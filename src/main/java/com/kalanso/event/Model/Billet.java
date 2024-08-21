@@ -29,7 +29,6 @@ public class Billet {
 
      @ManyToOne
      @JoinColumn(name = "categorieBillet_id")
-     @JsonBackReference("categoryBillet")
      private CategorieBillet categoryBillet;
 
      @ManyToOne

@@ -1,6 +1,7 @@
 package com.kalanso.event.Service;
 
 import com.google.zxing.WriterException;
+import com.kalanso.event.Model.Billet;
 import com.kalanso.event.Model.Evenement;
 import com.kalanso.event.Model.Reservation;
 
@@ -13,4 +14,5 @@ public interface Reservation_service {
     List<Reservation> getAllReservations();
     List<Evenement> getUserReservation(String email);
     Reservation afficher1(Long id);
+    List<Reservation> getcategoryByeventId(Integer id);
 }
