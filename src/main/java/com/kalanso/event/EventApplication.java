@@ -2,6 +2,7 @@ package com.kalanso.event;
 
 import com.kalanso.event.Model.*;
 import com.kalanso.event.Repository.*;
+import com.kalanso.event.Service.Notification.CovertImageToByte;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +10,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.Optional;
 
 @SpringBootApplication (exclude = { SecurityAutoConfiguration.class , })

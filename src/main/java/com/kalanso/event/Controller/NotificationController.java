@@ -6,6 +6,7 @@ import com.kalanso.event.Service.Notification.Notif_service_Alert_impl;
 import com.kalanso.event.Service.Notification.Notification_service;
 import com.lowagie.text.DocumentException;
 import jakarta.mail.MessagingException;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +32,9 @@ public class NotificationController{
         return notificationService.Ajouter(notification);
     }
 
-    @GetMapping("/Afficher")
-    public List<Notification> Afficher() {
-        return notificationService.Afficher();
+    @GetMapping("/Afficher/{id}")
+    public List<Notification> Afficher(@PathVariable Integer id) {
+        return notificationService.Afficher(id);
     }
 
     @DeleteMapping("/Delete")

@@ -17,7 +17,7 @@ public interface Notification_service {
     Notification Ajouter (Notification notification);
 
     //Methode pour Afficher une notification à la BD.
-    List<Notification> Afficher ();
+    List<Notification> Afficher (Integer id);
 
     //Methode pour supprimer une notification à la BD.
     String Delete (Integer id);
