@@ -14,5 +14,5 @@ public interface Reservation_service {
     List<Reservation> getAllReservations();
     List<Evenement> getUserReservation(String email);
     Reservation afficher1(Long id);
-    List<Reservation> getcategoryByeventId(Integer id);
+    List<Reservation> getcategoryByeventId(Long bid, Integer catid);
 }

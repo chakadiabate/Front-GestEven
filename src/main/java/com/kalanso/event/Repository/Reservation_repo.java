@@ -14,6 +14,6 @@ public interface Reservation_repo extends JpaRepository<Reservation,Long> {
     List<Evenement> findUserEmail(@Param("email") String email);
 
 
-    @Query("SELECT r FROM Reservation r where r.billet.categoryBillet.id = :id")
-    List<Reservation> findcategoryByeventId(@Param("id") Integer id);
+    @Query("SELECT r FROM Reservation r where r.billet.id = :bid and r.category.id = :catid")
+    List<Reservation> findcategoryByeventId(@Param("bid") Long bid, @Param("catid")Integer catid);
 }

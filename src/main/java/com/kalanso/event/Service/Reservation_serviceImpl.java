@@ -106,8 +106,8 @@ public class Reservation_serviceImpl implements Reservation_service {
     }
 
     @Override
-    public List<Reservation> getcategoryByeventId(Integer id) {
-        return reservationRepo.findcategoryByeventId(id);
+    public List<Reservation> getcategoryByeventId(Long bid, Integer catid) {
+        return reservationRepo.findcategoryByeventId(bid, catid);
     }
 
 }

@@ -44,9 +44,9 @@ public class ReservationController {
         return reservationService.getAllReservations();
     }
 
-    @GetMapping("/ListReservationBycat/{id}")
-    public List<Reservation> getcatById(@PathVariable Integer id) {
-        return reservationService.getcategoryByeventId(id);
+    @GetMapping("/ListReservationBycat/{bid}/{catid}")
+    public List<Reservation> getcatById(@PathVariable Long bid, @PathVariable Integer catid) {
+        return reservationService.getcategoryByeventId(bid ,catid);
     }
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/userReservation")
