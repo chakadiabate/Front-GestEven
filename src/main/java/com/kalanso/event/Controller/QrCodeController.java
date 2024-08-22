@@ -38,5 +38,8 @@ public class QrCodeController {
         return qrCodeService.getAll();
     }
 
-
+    @PatchMapping("/changeStatut/{id}")
+    public QrCode changeStatuts(@PathVariable Long id){
+        return qrCodeService.changeStatus(id);
+    }
 }
