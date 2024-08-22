@@ -112,5 +112,11 @@ public class EvenementController {
         }
     }
 
+    @GetMapping("/top2")
+    public List<Evenement> getTop3Evenements() {
+        return eventService.getTop3Evenements();
+    }
+
+
 
 }

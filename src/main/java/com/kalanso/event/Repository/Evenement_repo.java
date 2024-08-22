@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.awt.print.Pageable;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,6 +21,12 @@ public interface Evenement_repo extends JpaRepository<Evenement, Integer> {
     Evenement findNextEvent();
     //  int countEventsByUserId(@Param("id") int id);
 
-
+    @Query(value = "SELECT e.* " +
+            "FROM evenement e " +
+            "JOIN reservation r ON e.id = r.evenement_id " +
+            "GROUP BY e.id " +
+            "ORDER BY COUNT(r.id) DESC " +
+            "LIMIT 2", nativeQuery = true)
+    List<Evenement> findTop3EvenementsByReservations();
 
 }

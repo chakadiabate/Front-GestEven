@@ -18,10 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,5 +87,14 @@ public class QRCodeService {
 
     public List<QrCode> getAll(){
         return qrCode_repo.findAll();
+    }
+
+    public QrCode changeStatus(Long id){
+        StatutQrcode statutQrcode = statutQrcodeRepo.findByStatut("INACTIF");
+        return qrCode_repo.findById(id).map(
+                p -> {
+                    p.setStatutQrcode(statutQrcode);
+                    return qrCode_repo.save(p);
+                }).orElseThrow(()-> new RuntimeException("Error"));
     }
 }

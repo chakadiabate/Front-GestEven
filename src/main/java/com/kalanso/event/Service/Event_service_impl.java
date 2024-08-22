@@ -1,4 +1,6 @@
 package com.kalanso.event.Service;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import com.google.zxing.WriterException;
 import com.kalanso.event.Model.*;
@@ -7,9 +9,11 @@ import com.kalanso.event.Service.Notification.*;
 import com.lowagie.text.DocumentException;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.print.Pageable;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -111,4 +115,11 @@ public class Event_service_impl implements Evenement_service {
     public Evenement getEvenementById(Integer id) {
         return evenement_repo.findById(id).orElse(null);
     }
+
+    public List<Evenement> getTop3Evenements() {
+        return evenement_repo.findTop3EvenementsByReservations();
+    }
+
+
+
 }
