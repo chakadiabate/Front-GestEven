@@ -25,7 +25,7 @@ public class Reservation {
     private StatutReservation statut;
 
     @ManyToOne
-    @JoinColumn(name = "id_billet", nullable = true)
+    @JoinColumn(name = "id_billet", nullable = false)
   //  @JsonBackReference("billetR")
     private Billet billet;
 
