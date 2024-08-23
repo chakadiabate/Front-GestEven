@@ -30,9 +30,9 @@ public class Reservation_serviceImpl implements Reservation_service {
 
     @Override
     public Reservation Reserver(Reservation reservation) throws IOException, WriterException {
-        StatutReservation statutReservation = statutRepo.findByStatut("ACTIVE");
+        //StatutReservation statutReservation = statutRepo.findByStatut("ACTIVE");
         reservation.setDate_res(new Date());
-        reservation.setStatut(statutReservation);
+        //reservation.setStatut(statutReservation);
         //Integer evenement_id = reservation.getEvenement().getId();
 
         reservationRepo.save(reservation);
@@ -82,13 +82,13 @@ public class Reservation_serviceImpl implements Reservation_service {
         return reservation;
     }
 
-    @Override
+    /*@Override
     public Reservation AnnulerReservation(Long id) {
         return reservationRepo.findById(id).map(p->{
             p.setStatut(statutRepo.findByStatut("INACTIVE"));
             return reservationRepo.save(p);
         }).orElseThrow(()->new RuntimeException("Erreur lors de l'annulation de votre reservation"));
-    };
+    };*/
 
     @Override
     public List<Reservation> getAllReservations() {
@@ -103,6 +103,11 @@ public class Reservation_serviceImpl implements Reservation_service {
     @Override
     public Reservation afficher1(Long id) {
         return reservationRepo.findById(id).get();
+    }
+
+    @Override
+    public List<Reservation> reservationbilcatuser(Long bid, Integer catid, Integer userId) {
+        return reservationRepo.reservationbilcatuser(bid, catid, userId);
     }
 
     @Override

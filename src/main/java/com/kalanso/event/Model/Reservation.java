@@ -19,10 +19,10 @@ public class Reservation {
 
     private String tel;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "statut_id")
     //@JsonBackReference("StatutR")
-    private StatutReservation statut;
+    private StatutReservation statut;*/
 
     @ManyToOne
     @JoinColumn(name = "id_billet", nullable = true)

@@ -6,12 +6,13 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.kalanso.event.Model.QrCode;
+import com.kalanso.event.Model.Ticket;
 import com.kalanso.event.Model.Reservation;
 import com.kalanso.event.Model.StatutQrcode;
 import com.kalanso.event.Repository.Reservation_repo;
 import com.kalanso.event.Repository.StatutQrcode_repo;
-import com.kalanso.event.Repository.qrCode_repo;
+import com.kalanso.event.Repository.StatutReservationRepo;
+import com.kalanso.event.Repository.Ticket_repo;
 import com.kalanso.event.Service.Notification.GenerateRandomString;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,9 @@ import java.util.Map;
 public class QRCodeService {
 
     private Reservation_repo reservationRepo;
-    private qrCode_repo qrCode_repo;
+    private Ticket_repo Ticket_repo;
     private StatutQrcode_repo statutQrcodeRepo;
+    private StatutReservationRepo statutReservationRepo;
     private GenerateRandomString generateRandomString;
 
     public byte[] generateQRCode(String text, int width, int height) throws WriterException, IOException {
@@ -55,14 +57,14 @@ public class QRCodeService {
 
         StatutQrcode statutQrcode = statutQrcodeRepo.findByStatut("ACTIF");
         String random = generateRandomString.generateRandomString();
-        QrCode qrCode = QrCode.builder()
+        Ticket ticket = Ticket.builder()
                 .nameFile("" + reservation1.getId() + ".png")
                 .reservation(reservation)
                 .file(qrCodeImage)
                 .statutQrcode(statutQrcode)
                 .ticketId(random)
                 .build();
-        qrCode_repo.save(qrCode);
+        Ticket_repo.save(ticket);
     }
 
     /*public byte[] GetQrCode(String fileName) throws IOException {
@@ -81,20 +83,21 @@ public class QRCodeService {
         return Files.readAllBytes(new File(path).toPath());
     }*/
 
-    public List<QrCode> GetQrCodeName(Long id, String email) {
-        return qrCode_repo.findTickets(id, email);
+    public List<Ticket> GetQrCodeName(Long id, String email) {
+        return Ticket_repo.findTickets(id, email);
     }
 
-    public List<QrCode> getAll(){
-        return qrCode_repo.findAll();
+    public List<Ticket> getAll(){
+        return Ticket_repo.findAll();
     }
 
-    public QrCode changeStatus(Long id){
+    public Ticket changeStatus(Long id){
         StatutQrcode statutQrcode = statutQrcodeRepo.findByStatut("INACTIF");
-        return qrCode_repo.findById(id).map(
+
+        return Ticket_repo.findById(id).map(
                 p -> {
                     p.setStatutQrcode(statutQrcode);
-                    return qrCode_repo.save(p);
+                    return Ticket_repo.save(p);
                 }).orElseThrow(()-> new RuntimeException("Error"));
     }
 }

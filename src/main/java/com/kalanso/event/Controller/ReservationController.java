@@ -48,6 +48,11 @@ public class ReservationController {
     public List<Reservation> getcatById(@PathVariable Long bid, @PathVariable Integer catid) {
         return reservationService.getcategoryByeventId(bid ,catid);
     }
+
+    @GetMapping("/ListReservationBycat/{bid}/{catid}/{userId}")
+    public List<Reservation> getcatByIduser(@PathVariable Long bid, @PathVariable Integer catid, @PathVariable Integer userId) {
+        return reservationService.reservationbilcatuser(bid ,catid, userId);
+    }
     @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("/userReservation")
     public List<Evenement> getUserReservation(@RequestParam String email){
@@ -60,10 +65,10 @@ public class ReservationController {
         return reservationService.afficher1(id);
     }
 
-    @PatchMapping("/AnnulerReservation")
+    /*@PatchMapping("/AnnulerReservation")
     public Reservation CancelReservation(@RequestParam Long id) {
         return reservationService.AnnulerReservation(id);
-    }
+    }*/
 
 
 }

@@ -10,9 +10,10 @@ import java.util.List;
 
 public interface Reservation_service {
     Reservation Reserver(Reservation reservation)throws IOException, WriterException;
-    Reservation AnnulerReservation(Long id);
+    //Reservation AnnulerReservation(Long id);
     List<Reservation> getAllReservations();
     List<Evenement> getUserReservation(String email);
     Reservation afficher1(Long id);
+    List<Reservation> reservationbilcatuser(Long bid, Integer catid, Integer userId);
     List<Reservation> getcategoryByeventId(Long bid, Integer catid);
 }

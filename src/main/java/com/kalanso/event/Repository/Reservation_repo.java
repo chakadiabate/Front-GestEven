@@ -16,4 +16,8 @@ public interface Reservation_repo extends JpaRepository<Reservation,Long> {
 
     @Query("SELECT r FROM Reservation r where r.billet.id = :bid and r.category.id = :catid")
     List<Reservation> findcategoryByeventId(@Param("bid") Long bid, @Param("catid")Integer catid);
+
+    @Query("SELECT r FROM Reservation r where r.billet.id = :bid and r.category.id = :catid and r.utilisateur.id = :uid")
+    List<Reservation> reservationbilcatuser(@Param("bid") Long bid, @Param("catid")Integer catid, @Param("uid")Integer uid);
+
 }
