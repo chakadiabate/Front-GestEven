@@ -17,6 +17,8 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String tel;
+
     @ManyToOne
     @JoinColumn(name = "statut_id")
     //@JsonBackReference("StatutR")
