@@ -1,6 +1,5 @@
 package com.kalanso.event.Repository;
 
-import com.kalanso.event.Model.RoleUser;
 import com.kalanso.event.Model.TypeEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 

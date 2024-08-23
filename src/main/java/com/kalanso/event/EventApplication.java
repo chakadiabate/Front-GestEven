@@ -20,13 +20,15 @@ public class EventApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner1(RolePrestateurRepo rolePrestateurRepo,
-												StatutReservationRepo statutReservationRepo, StatutEnvoiRepo statutEnvoiRepo,
-												StatutBilletRepo statutBilletRepo) {
+												StatutReservationRepo statutReservationRepo,
+												StatutEnvoiRepo statutEnvoiRepo,
+												StatutBilletRepo statutBilletRepo,
+												StatutQrcode_repo statutQrcodeRepo) {
 		return args -> {
-			RolePrestateur rolePrestateurs= rolePrestateurRepo.findByRole("CONFERANCIER");
+			RolePrestateur rolePrestateurs= rolePrestateurRepo.findByRole("CONFERENCIER");
 			if (rolePrestateurs == null) {
 				RolePrestateur rolePrestateur = new RolePrestateur();
-				rolePrestateur.setRole("CONFERANCIER");
+				rolePrestateur.setRole("CONFERENCIER");
 				rolePrestateurRepo.save(rolePrestateur);
 			}
 
@@ -39,6 +41,17 @@ public class EventApplication {
 				StatutReservation statutReservation2 = new StatutReservation();
 				statutReservation2.setStatut("INACTIVE");
 				statutReservationRepo.save(statutReservation2);
+			}
+
+			StatutTicket statutTicket1 = statutQrcodeRepo.findByStatut("ACTIF");
+			StatutTicket statutTicket2 = statutQrcodeRepo.findByStatut("INACTIF");
+			if (statutTicket1 == null || statutTicket2 == null) {
+				StatutTicket statutTicketA = new StatutTicket();
+				statutTicketA.setStatut("ACTIF");
+				statutQrcodeRepo.save(statutTicketA);
+				StatutTicket statutTicketB = new StatutTicket();
+				statutTicketB.setStatut("INACTIF");
+				statutQrcodeRepo.save(statutTicketB);
 			}
 
 			StatutEnvoi statutEnvois = statutEnvoiRepo.findByStatut("SUCCES");//Or ECHEC
@@ -91,11 +104,11 @@ public class EventApplication {
 				categorieBilletRepo.save(categorieBilletC);
 			}
 
-			CategorieEvent categorieEvent2= categorieEventRepo.findByCategory("CONFERANCE");
+			CategorieEvent categorieEvent2= categorieEventRepo.findByCategory("CONFERENCE");
 			CategorieEvent categorieEvent1= categorieEventRepo.findByCategory("CONCERT");
 			if (categorieEvent1 == null || categorieEvent2 == null) {
 				CategorieEvent categorieEventA = new CategorieEvent();
-				categorieEventA.setCategory("CONFERANCE");
+				categorieEventA.setCategory("CONFERENCE");
 				categorieEventRepo.save(categorieEventA);
 				CategorieEvent categorieEventB = new CategorieEvent();
 				categorieEventB.setCategory("CONCERT");
@@ -115,7 +128,7 @@ public class EventApplication {
 
 			MethodePaiement methodepaie1= methoPaieRepo.findByMethodepaie("Orange_Money");
 			MethodePaiement methodepaie2= methoPaieRepo.findByMethodepaie("Moov_money");
-			if (typeEvent1 == null || typeEvent2 == null) {
+			if (methodepaie1 == null || methodepaie2 == null) {
 				MethodePaiement methodepaieA = new MethodePaiement();
 				methodepaieA.setMethodepaie("Orange_Money");
 				methoPaieRepo.save(methodepaieA);
@@ -124,17 +137,21 @@ public class EventApplication {
 				methoPaieRepo.save(methodepaieB);
 			}
 
-            RoleUser roleUsers1 = roleuserRepo.findByRole("GESTIONNAIRE");
-            RoleUser roleUsers2 = roleuserRepo.findByRole("ORGANISATEUR");
-            if (roleUsers1 == null || roleUsers2 == null) {
-                RoleUser roleUser1 = new RoleUser();
-                roleUser1.setRole("GESTIONNAIRE");
-                System.out.println("hello3");
-                RoleUser roleUser2 = new RoleUser();
-                roleUser2.setRole("ORGANISATEUR");
-                roleuserRepo.save(roleUser1);
-                roleuserRepo.save(roleUser2);
-            }
+			RoleUser roleUsers1 = roleuserRepo.findByRole("GESTIONNAIRE");
+			RoleUser roleUsers2 = roleuserRepo.findByRole("ORGANISATEUR");
+			RoleUser roleUsers3 = roleuserRepo.findByRole("CLIENT");
+			if (roleUsers1 == null || roleUsers2 == null || roleUsers3 == null) {
+				RoleUser roleUser1 = new RoleUser();
+				roleUser1.setRole("GESTIONNAIRE");
+				System.out.println("hello3");
+				RoleUser roleUser2 = new RoleUser();
+				roleUser2.setRole("ORGANISATEUR");
+				RoleUser roleUser3 = new RoleUser();
+				roleUser3.setRole("CLIENT");
+				roleuserRepo.save(roleUser1);
+				roleuserRepo.save(roleUser2);
+				roleuserRepo.save(roleUser3);
+			}
 
 		};
 	}

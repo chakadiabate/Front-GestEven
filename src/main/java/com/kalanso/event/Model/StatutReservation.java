@@ -22,8 +22,9 @@ public class StatutReservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long Id;
     private String statut;
-    @OneToMany(mappedBy = "statut")
-    @JsonIgnore
-    private List<Reservation> reservation;
+
+    //@OneToMany(mappedBy = "statut")
+    //@JsonManagedReference("StatutR")
+    //private List<Reservation> reservation;
 
 }

@@ -1,5 +1,6 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,8 @@ public class Lieu {
     private String salle;
     private Integer capacite;
 
-    @OneToMany(mappedBy = "lieu")
-    private List<Derouler> derouler;
+    //@OneToMany(mappedBy = "lieu")
+    //@JsonIgnoreProperties("lieu")
+    //private List<Derouler> derouler;
     // Getters, setters, constructeurs
 }

@@ -18,9 +18,16 @@ public class CategorieBillet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String category;
-    @OneToMany(mappedBy = "category")
-    @JsonIgnoreProperties("category")
-    private List<Reservation> reservation;
+
+    //@OneToMany(mappedBy = "category")
+    //@JsonManagedReference("categoryR")
+     //List<Reservation> reservation;
+
+    //@OneToMany(mappedBy = "category")
+    //@JsonManagedReference("catQr")
+    //private List<QrCode> qrCode;
+
+
     //private String description;
     // Getters, setters, constructeurs
 }

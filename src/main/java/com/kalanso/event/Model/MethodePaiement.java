@@ -25,8 +25,8 @@ public class MethodePaiement {
     private String methodepaie;
 
 
-    @OneToMany(mappedBy = "methodePaiement")
-    @JsonIgnoreProperties("methodePaiement")
-    private List<Reservation> reservation;
+    //@OneToMany(mappedBy = "methodePaiement")
+    //@JsonManagedReference("methodePaieR")
+    //private List<Reservation> reservation;
 
 }

@@ -22,7 +22,9 @@ public class Billet_service {
     public List<Billet> getAllBillets() {
         return billetRepository.findAll();
     }
-
+    public List<Integer> getPrixById(Long id) {
+        return billetRepository.findPrixBilletById(id);
+    }
     public Optional<Billet> getBilletById(Long id) {
         return billetRepository.findById(id);
     }
@@ -42,5 +44,9 @@ public class Billet_service {
 
     public void deleteBillet(Long id) {
         billetRepository.deleteById(id);
+    }
+
+    public List<Billet> getcategoryByeventId(Long id) {
+        return billetRepository.findcategoryByeventId(id);
     }
 }

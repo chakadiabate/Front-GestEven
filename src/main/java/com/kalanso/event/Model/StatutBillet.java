@@ -18,10 +18,10 @@ public class StatutBillet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long Id;
+    private  Long Id;
     private String statut;
-    @JsonBackReference(value = "users")
-    @OneToMany(mappedBy = "status")
-    private List<Billet> billet;
+    //@JsonBackReference(value = "users")
+    //@OneToMany(mappedBy = "status")
+    //private List<Billet> billet;
 
 }

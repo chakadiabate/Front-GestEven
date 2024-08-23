@@ -177,8 +177,8 @@ public class Notif_serviceTicket_impl implements Notification_service {
     }
 
     @Override
-    public List<Notification> Afficher() {
-        return notificationRepo.findAll();
+    public List<Notification> Afficher(Integer id) {
+        return notificationRepo.findNotif(id);
     }
 
     @Override

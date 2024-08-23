@@ -18,10 +18,12 @@ public class Billet_controller {
     private Billet_service billetService;
 
 
-    @GetMapping
+    @GetMapping("/afficherBillets")
     public List<Billet> getAllBillets() {
         return billetService.getAllBillets();
     }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Billet> getBilletById(@PathVariable Long id) {
@@ -30,19 +32,30 @@ public class Billet_controller {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping("AjoutBillet")
+    @GetMapping("/Prix/{id}")
+    public List<Integer> getUserById(@PathVariable Long id) {
+        return billetService.getPrixById(id);
+    }
+
+    @GetMapping("/getcategoryByevtId/{id}")
+    public List<Billet> getcatById(@PathVariable Long id) {
+        return billetService.getcategoryByeventId(id);
+    }
+
+
+    @PostMapping("/AjoutBillet")
     public ResponseEntity<Billet> createBillet(@RequestBody Billet billet) {
         Billet createdBillet = billetService.createBillet(billet);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBillet);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Billet> updateBillet(@PathVariable Long id, @RequestBody Billet updatedBillet) {
         Billet updated = billetService.updateBillet(id, updatedBillet);
         return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteBillet/{id}")
     public ResponseEntity<Void> deleteBillet(@PathVariable Long id) {
         billetService.deleteBillet(id);
         return ResponseEntity.noContent().build();

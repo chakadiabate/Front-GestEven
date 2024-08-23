@@ -1,13 +1,11 @@
 package com.kalanso.event.Service;
 
 import com.google.zxing.WriterException;
-import com.kalanso.event.Model.Evenement;
-import com.kalanso.event.Model.Notification;
-import com.kalanso.event.Model.Reservation;
-import com.kalanso.event.Model.StatutReservation;
+import com.kalanso.event.Model.*;
 import com.kalanso.event.Repository.Evenement_repo;
 import com.kalanso.event.Repository.Reservation_repo;
 import com.kalanso.event.Repository.StatutReservationRepo;
+import com.kalanso.event.Repository.Utilisateur_repo;
 import com.kalanso.event.Service.Notification.Notif_service_Reservation_impl;
 import com.lowagie.text.DocumentException;
 import jakarta.mail.MessagingException;
@@ -23,27 +21,33 @@ import java.util.List;
 public class Reservation_serviceImpl implements Reservation_service {
 
     private final Evenement_repo evenement_repo;
+    private final Utilisateur_repo utilisateur_repo;
     private Reservation_repo reservationRepo;
     private Notif_service_Reservation_impl notifServiceReservationImpl;
     private StatutReservationRepo statutRepo;
     private ContexHolder contexHolder;
+    private QRCodeService qrCodeService;
 
     @Override
-    public Reservation Reserver(Reservation reservation) {
+    public Reservation Reserver(Reservation reservation) throws IOException, WriterException {
         StatutReservation statutReservation = statutRepo.findByStatut("ACTIVE");
-        reservation.setUtilisateur(contexHolder.utilisateur());
         reservation.setDate_res(new Date());
         reservation.setStatut(statutReservation);
         //Integer evenement_id = reservation.getEvenement().getId();
 
         reservationRepo.save(reservation);
 
+        qrCodeService.StoreQrCode(reservation);
+
         System.out.println(reservation.getEvenement());
         evenement_repo.findById(reservation.getEvenement().getId()).map(ev->{
+            System.out.println(reservation.getUtilisateur());
+            Utilisateur utilisateur = utilisateur_repo.findById(reservation.getUtilisateur().getId()).get();
             Integer typeevent_id = ev.getTypeevent().getId();
             System.out.println(typeevent_id);
             Notification notification = new Notification();
-            notification.setDest_email(contexHolder.utilisateur().getEmail());
+            notification.setUtilisateur(utilisateur);
+            notification.setDest_email(utilisateur.getEmail());
             notification.setSujet("Reservation de ticket");
             notification.setEvenement(ev);
             try {
@@ -90,4 +94,20 @@ public class Reservation_serviceImpl implements Reservation_service {
     public List<Reservation> getAllReservations() {
         return reservationRepo.findAll();
     }
+
+    @Override
+    public List<Evenement> getUserReservation(String email) {
+        return reservationRepo.findUserEmail(email);
+    }
+
+    @Override
+    public Reservation afficher1(Long id) {
+        return reservationRepo.findById(id).get();
+    }
+
+    @Override
+    public List<Reservation> getcategoryByeventId(Long bid, Integer catid) {
+        return reservationRepo.findcategoryByeventId(bid, catid);
+    }
+
 }

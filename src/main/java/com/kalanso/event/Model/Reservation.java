@@ -1,11 +1,13 @@
 package com.kalanso.event.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,31 +19,42 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "statut_id")
+    //@JsonBackReference("StatutR")
     private StatutReservation statut;
+
+    @ManyToOne
+    @JoinColumn(name = "id_billet", nullable = false)
+  //  @JsonBackReference("billetR")
+    private Billet billet;
 
     //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "evenement_id")
-    @JsonIgnoreProperties("reservation, utilisateur")
+    //@JsonBackReference("eventR")
     private Evenement evenement;
 
     private Date date_res = new Date();
 
+    //@OneToMany(mappedBy = "reservation")
+    //@JsonManagedReference("bookQr")
+    //private List<QrCode> qrCode;
+
+
     @ManyToOne
     @JoinColumn(name = "methodePaiement_id")
-    @JsonIgnoreProperties("reservation")
+    //@JsonBackReference("methodePaieR")
     private MethodePaiement methodePaiement;
 
-   //@JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
-    @JsonIgnoreProperties("reservation")
+    //@JsonBackReference("bookR")
     private Utilisateur utilisateur;
 
     @ManyToOne
     @JoinColumn(name = "categories")
-    @JsonIgnoreProperties("reservation")
-     private CategorieBillet category;
+    //@JsonBackReference("categoryR")
+    private CategorieBillet category;
 }
 
 

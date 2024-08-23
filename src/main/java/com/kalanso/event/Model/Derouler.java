@@ -1,5 +1,6 @@
 package com.kalanso.event.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -22,10 +23,12 @@ public class Derouler {
 
     @ManyToOne
     @JoinColumn(name = "lieu_id")
+   // @JsonIgnoreProperties("derouler")
     private Lieu lieu;
 
     @ManyToOne
     @JoinColumn(name = "evenement_id")
+  //  @JsonIgnoreProperties("derouler")
     private Evenement evenement;
 
 
