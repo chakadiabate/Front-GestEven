@@ -6,9 +6,9 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.kalanso.event.Model.QrCode;
+import com.kalanso.event.Model.Ticket;
 import com.kalanso.event.Model.Reservation;
-import com.kalanso.event.Model.StatutQrcode;
+import com.kalanso.event.Model.StatutTicket;
 import com.kalanso.event.Repository.Reservation_repo;
 import com.kalanso.event.Repository.StatutQrcode_repo;
 import com.kalanso.event.Repository.qrCode_repo;
@@ -53,16 +53,16 @@ public class QRCodeService {
         //String qrCodeFilePath = "D:\\GestEvent_SRC1\\" + reservation1.getId() + ".png"; // Remplacez par le chemin de votre dossier
         //Files.write(Paths.get(qrCodeFilePath), qrCodeImage);
 
-        StatutQrcode statutQrcode = statutQrcodeRepo.findByStatut("ACTIF");
+        StatutTicket statutTicket = statutQrcodeRepo.findByStatut("ACTIF");
         String random = generateRandomString.generateRandomString();
-        QrCode qrCode = QrCode.builder()
+        Ticket ticket = Ticket.builder()
                 .nameFile("" + reservation1.getId() + ".png")
                 .reservation(reservation)
                 .file(qrCodeImage)
-                .statutQrcode(statutQrcode)
+                .statutTicket(statutTicket)
                 .ticketId(random)
                 .build();
-        qrCode_repo.save(qrCode);
+        qrCode_repo.save(ticket);
     }
 
     /*public byte[] GetQrCode(String fileName) throws IOException {
@@ -81,19 +81,19 @@ public class QRCodeService {
         return Files.readAllBytes(new File(path).toPath());
     }*/
 
-    public List<QrCode> GetQrCodeName(Long id, String email) {
+    public List<Ticket> GetQrCodeName(Long id, String email) {
         return qrCode_repo.findTickets(id, email);
     }
 
-    public List<QrCode> getAll(){
+    public List<Ticket> getAll(){
         return qrCode_repo.findAll();
     }
 
-    public QrCode changeStatus(Long id){
-        StatutQrcode statutQrcode = statutQrcodeRepo.findByStatut("INACTIF");
+    public Ticket changeStatus(Long id){
+        StatutTicket statutTicket = statutQrcodeRepo.findByStatut("INACTIF");
         return qrCode_repo.findById(id).map(
                 p -> {
-                    p.setStatutQrcode(statutQrcode);
+                    p.setStatutTicket(statutTicket);
                     return qrCode_repo.save(p);
                 }).orElseThrow(()-> new RuntimeException("Error"));
     }

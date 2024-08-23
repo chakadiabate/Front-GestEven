@@ -1,14 +1,10 @@
 package com.kalanso.event.Controller;
 
-import com.kalanso.event.Model.QrCode;
+import com.kalanso.event.Model.Ticket;
 import com.kalanso.event.Service.QRCodeService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RequestMapping("/gestEvent/QrCode")
@@ -29,17 +25,17 @@ public class QrCodeController {
     }*/
 
     @GetMapping("/fileSystem/{email}/List")
-    public List<QrCode> GetQrCodeName(@RequestParam Long id, @PathVariable String email) {
+    public List<Ticket> GetQrCodeName(@RequestParam Long id, @PathVariable String email) {
         return qrCodeService.GetQrCodeName(id, email);
     }
 
     @GetMapping("/fileSystem/Lists")
-    public List<QrCode> getAll(){
+    public List<Ticket> getAll(){
         return qrCodeService.getAll();
     }
 
     @PatchMapping("/changeStatut/{id}")
-    public QrCode changeStatuts(@PathVariable Long id){
+    public Ticket changeStatuts(@PathVariable Long id){
         return qrCodeService.changeStatus(id);
     }
 }

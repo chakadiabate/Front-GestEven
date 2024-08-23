@@ -2,7 +2,6 @@ package com.kalanso.event;
 
 import com.kalanso.event.Model.*;
 import com.kalanso.event.Repository.*;
-import com.kalanso.event.Service.Notification.CovertImageToByte;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +9,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.io.File;
-import java.io.InputStream;
 import java.util.Optional;
 
 @SpringBootApplication (exclude = { SecurityAutoConfiguration.class , })
@@ -46,15 +43,15 @@ public class EventApplication {
 				statutReservationRepo.save(statutReservation2);
 			}
 
-			StatutQrcode statutQrcode1 = statutQrcodeRepo.findByStatut("ACTIF");
-			StatutQrcode statutQrcode2 = statutQrcodeRepo.findByStatut("INACTIF");
-			if (statutQrcode1 == null || statutQrcode2 == null) {
-				StatutQrcode StatutQrcodeA = new StatutQrcode();
-				StatutQrcodeA.setStatut("ACTIF");
-				statutQrcodeRepo.save(StatutQrcodeA);
-				StatutQrcode StatutQrcodeB = new StatutQrcode();
-				StatutQrcodeB.setStatut("INACTIF");
-				statutQrcodeRepo.save(StatutQrcodeB);
+			StatutTicket statutTicket1 = statutQrcodeRepo.findByStatut("ACTIF");
+			StatutTicket statutTicket2 = statutQrcodeRepo.findByStatut("INACTIF");
+			if (statutTicket1 == null || statutTicket2 == null) {
+				StatutTicket statutTicketA = new StatutTicket();
+				statutTicketA.setStatut("ACTIF");
+				statutQrcodeRepo.save(statutTicketA);
+				StatutTicket statutTicketB = new StatutTicket();
+				statutTicketB.setStatut("INACTIF");
+				statutQrcodeRepo.save(statutTicketB);
 			}
 
 			StatutEnvoi statutEnvois = statutEnvoiRepo.findByStatut("SUCCES");//Or ECHEC
